@@ -11,45 +11,55 @@ public class SyntaxHighlighterTest {
 	
 	@Before
 	public void setup() {
-		
+		syntaxHighlighter = new SyntaxHighlighterImpl();
 	}
 	
 	@Test(expected=SyntaxHighlightingException.class)
 	public void shouldReportThatStyleCannotBeAppliedOnNull() {
-		String sentense = null;
-		syntaxHighlighter.highlightThis(sentense);
+		String sentence = null;
+		syntaxHighlighter.highlightThis(sentence);
 	}
 	
 	@Test(expected=SyntaxHighlightingException.class)
 	public void shouldReportThatStyleCannotBeAppliedOnBlank() {
-		String sentense = "";
-		syntaxHighlighter.highlightThis(sentense);
+		String sentence = "";
+		syntaxHighlighter.highlightThis(sentence);
 	}
 
 	@Test(expected=SyntaxHighlightingException.class)
 	public void shouldReportThatStyleCannotBeAppliedOnWhiteSpaces() {
-		String sentense = "     ";
-		syntaxHighlighter.highlightThis(sentense);
+		String sentence = "     ";
+		syntaxHighlighter.highlightThis(sentence);
 	}
-	
+
 	@Test
-	public void shouldApplyStyleOnThisSentense() {
-		String sentense = "I am going to join java mentoring program to learn cool stuff in fun way.";
-		String expectedHighlightedSentense = "I [bold] am [/bold] going [italic] to [/italic] join java mentoring program [italic] to [/italic] learn cool stuff [underline] in [/underline] fun way.";
-		
-		String highlightSentense = syntaxHighlighter.highlightThis(sentense);
-		
-		assertEquals(expectedHighlightedSentense, highlightSentense);
+	public void shouldApplyStyleOnThisSentence() {
+		String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
+		String expectedHighlightedSentence = "I [bold] am [/bold] going [italic] to [/italic] join java mentoring program [italic] to [/italic] learn cool stuff [underline] in [/underline] fun way.";
+
+		String highlightSentence = syntaxHighlighter.highlightThis(sentence);
+
+		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
-	
+
 	@Test
-	public void shouldNotApplyStyleOnThisSentense() {
-		String sentense = "I know everything, so it's waste of effort.";
-		String expectedHighlightedSentense = "I know everything, so it's waste of effort.";
-		
-		String highlightSentense = syntaxHighlighter.highlightThis(sentense);
-		
-		assertEquals(expectedHighlightedSentense, highlightSentense);
+	public void shouldApplyStyleOnThisSimpleSentence() {
+		String sentence = "I am going";
+		String expectedHighlightedSentence = "I [bold] am [/bold] going";
+
+		String highlightSentence = syntaxHighlighter.highlightThis(sentence);
+
+		assertEquals(expectedHighlightedSentence, highlightSentence);
+	}
+
+	@Test
+	public void shouldNotApplyStyleOnThisSentence() {
+		String sentence = "I know everything, so it's waste of effort.";
+		String expectedHighlightedSentence = "I know everything, so it's waste of effort.";
+
+		String highlightSentence = syntaxHighlighter.highlightThis(sentence);
+
+		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
 	
 }
