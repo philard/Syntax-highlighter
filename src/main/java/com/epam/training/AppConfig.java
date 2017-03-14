@@ -21,12 +21,20 @@ public class AppConfig {
 
     private ArrayList<IWordHighlighter> wordHighlighters() {
         ArrayList<IWordHighlighter> wordHighlighters = new ArrayList();
-        wordHighlighters.add(getSimpleWordHighlighter());
+        wordHighlighters.add(getAmWordHighlighter());
+        wordHighlighters.add(getToWordHighlighter());
+        wordHighlighters.add(getInWordHighlighter());
         return wordHighlighters;
     }
 
-    private SimpleWordHighlighter getSimpleWordHighlighter() {
-        return new SimpleWordHighlighter(" [bold]", " am ", "[/bold] ");
+    private SimpleWordHighlighter getAmWordHighlighter() {
+        return new SimpleWordHighlighter("[bold]", "am", "[/bold]");
+    }
+    private SimpleWordHighlighter getToWordHighlighter() {
+        return new SimpleWordHighlighter("[italic]", "to", "[/italic]");
+    }
+    private SimpleWordHighlighter getInWordHighlighter() {
+        return new SimpleWordHighlighter("[underline]", "in", "[/underline]");
     }
 
 }

@@ -1,5 +1,6 @@
 package com.epam.training;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -21,6 +22,10 @@ class SimpleWordHighlighter implements  IWordHighlighter{
 
     public String highlight(String sentence) {
 
-        return sentence.replace(word, prefix + word + postfix);
+//        Pattern = Pattern.compile("").matcher
+        String highlightedWord = prefix + word + postfix;
+        sentence = sentence.replaceAll("(?<=\\s)" + word + "(?=\\s|\\.)", highlightedWord);
+
+        return sentence;
     }
 }
