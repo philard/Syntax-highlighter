@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 
 public class SyntaxHighlighterTest {
 
@@ -11,7 +13,8 @@ public class SyntaxHighlighterTest {
 	
 	@Before
 	public void setup() {
-		syntaxHighlighter = new SyntaxHighlighterImpl();
+		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		syntaxHighlighter = (SyntaxHighlighter) context.getBean("syntaxHighlighter");
 	}
 	
 	@Test(expected=SyntaxHighlightingException.class)
@@ -44,8 +47,8 @@ public class SyntaxHighlighterTest {
 
 	@Test
 	public void shouldApplyStyleOnThisSimpleSentence() {
-		String sentence = "I am going";
-		String expectedHighlightedSentence = "I [bold] am [/bold] going";
+		String sentence = "I am Sam.";
+		String expectedHighlightedSentence = "I [bold]am[/bold] Sam.";
 
 		String highlightSentence = syntaxHighlighter.highlightThis(sentence);
 

@@ -4,23 +4,33 @@ import java.util.ArrayList;
 
 public class SyntaxHighlighterImpl implements SyntaxHighlighter{
 
+	public SentenceValidator getSentenceValidator() {
+		return sentenceValidator;
+	}
+
+	public void setSentenceValidator(SentenceValidator sentenceValidator) {
+		this.sentenceValidator = sentenceValidator;
+	}
+
 	private SentenceValidator sentenceValidator;
+
+	public ArrayList<IWordHighlighter> getWordHighlighters() {
+		return wordHighlighters;
+	}
+
+	public void setWordHighlighters(ArrayList<IWordHighlighter> wordHighlighters) {
+		this.wordHighlighters = wordHighlighters;
+	}
 
 	private ArrayList<IWordHighlighter> wordHighlighters;
 
 	public String highlightThis(String sentence) throws SyntaxHighlightingException {
 
-		//Context setup
-		ArrayList<IWordHighlighter> wordHighlighters = new ArrayList();
-		wordHighlighters.add(new SimpleWordHighlighter("[bold]", " am ", "[/bold]"));
-		sentenceValidator = new SentenceValidator();
-
-
 		//Validation
 		sentenceValidator.validate(sentence);
 
 		for(IWordHighlighter wordHighlighter: wordHighlighters) {
-			wordHighlighter.highlight(sentence);
+			sentence = wordHighlighter.highlight(sentence);
 		}
 
 		String highlighted = sentence;

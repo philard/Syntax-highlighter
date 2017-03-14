@@ -21,9 +21,6 @@ class SimpleWordHighlighter implements  IWordHighlighter{
 
     public String highlight(String sentence) {
 
-
-        sentence.replace(" " + word + " ", prefix + word + postfix);
-
-        return sentence;
+        return sentence.replace(word, prefix + word + postfix);
     }
 }
