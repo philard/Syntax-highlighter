@@ -5,5 +5,5 @@ package com.epam.training;
  */
 interface IWordHighlighter {
 
-    String highlight(String sentence);
+    String highlightThis(String sentence);
 }

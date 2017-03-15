@@ -20,7 +20,7 @@ class SimpleWordHighlighter implements  IWordHighlighter{
         this.postfix = postfix;
     }
 
-    public String highlight(String sentence) {
+    public String highlightThis(String sentence) {
 
 //        Pattern = Pattern.compile("").matcher
         String highlightedWord = prefix + word + postfix;

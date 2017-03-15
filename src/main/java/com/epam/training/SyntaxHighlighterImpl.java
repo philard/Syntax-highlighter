@@ -30,7 +30,7 @@ public class SyntaxHighlighterImpl implements SyntaxHighlighter{
 		sentenceValidator.validate(sentence);
 
 		for(IWordHighlighter wordHighlighter: wordHighlighters) {
-			sentence = wordHighlighter.highlight(sentence);
+			sentence = wordHighlighter.highlightThis(sentence);
 		}
 
 		String highlighted = sentence;
