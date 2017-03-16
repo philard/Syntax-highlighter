@@ -1,13 +1,19 @@
-package com.epam.training;
+package com.epam.training.sentence.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import com.epam.training.context.AppConfig;
+import com.epam.training.exception.SyntaxHighlightingException;
+import com.epam.training.sentence.SyntaxHighlighter;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
-public class SyntaxHighlighterTest {
+/**
+ * SyntaxHighlighterImpl is now composed of services. This is an integration test class to test it.
+ */
+public class ISyntaxHighlighterTest {
 
 	private SyntaxHighlighter syntaxHighlighter;
 	

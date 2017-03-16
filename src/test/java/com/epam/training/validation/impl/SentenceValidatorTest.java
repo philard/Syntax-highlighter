@@ -1,5 +1,6 @@
-package com.epam.training;
+package com.epam.training.validation.impl;
 
+import com.epam.training.exception.SyntaxHighlightingException;
 import org.junit.Before;
 import org.junit.Test;
 

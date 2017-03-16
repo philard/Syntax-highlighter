@@ -1,6 +1,5 @@
-package com.epam.training;
+package com.epam.training.word.impl;
 
-import com.epam.training.word.impl.SimpleWordHighlighter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,7 +52,7 @@ public class SimpleWordHighligherTest {
     @Test
     public void shouldApplyStyleOnlyWhenMatchedWholeWord() {
         String sentence = "I'm in.";
-        String expectedHighlightedSentence = "I'm [underline]in[/underline.";
+        String expectedHighlightedSentence = "I'm [underline]in[/underline].";
 
         String highlightSentence = simpleWordHighlighter.highlightThis(sentence);
 

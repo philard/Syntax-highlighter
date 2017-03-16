@@ -1,6 +1,6 @@
 package com.epam.training.sentence;
 
-import com.epam.training.SyntaxHighlightingException;
+import com.epam.training.exception.SyntaxHighlightingException;
 
 public interface SyntaxHighlighter {
 
