@@ -1,7 +1,7 @@
 package com.epam.training;
 
 import com.epam.training.context.AppConfig;
-import com.epam.training.sentence.SyntaxHighlighter;
+import com.epam.training.sentence.ISyntaxHighlighter;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
@@ -9,9 +9,10 @@ public class AppMain {
 
     public static void main(String args[]) {
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        SyntaxHighlighter bean = (SyntaxHighlighter) context.getBean("syntaxHighlighter");
+        ISyntaxHighlighter sentenceValidatorImpl = (ISyntaxHighlighter) context.getBean("syntaxHighlighter");
 
-        bean.highlightThis("I am going");
+        String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
+        System.out.println(sentenceValidatorImpl.highlightThis(sentence));
         context.close();
 
     }

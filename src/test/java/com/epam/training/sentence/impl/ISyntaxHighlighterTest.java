@@ -4,41 +4,40 @@ import static org.junit.Assert.assertEquals;
 
 import com.epam.training.context.AppConfig;
 import com.epam.training.exception.SyntaxHighlightingException;
-import com.epam.training.sentence.SyntaxHighlighter;
+import com.epam.training.sentence.ISyntaxHighlighter;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
 /**
- * SyntaxHighlighterImpl is now composed of services. This is an integration test class to test it.
+ * ISyntaxHighlighterImpl is now composed of services. This is an integration test class to test it.
  */
 public class ISyntaxHighlighterTest {
 
-	private SyntaxHighlighter syntaxHighlighter;
+	private ISyntaxHighlighter ISyntaxHighlighter;
 	
 	@Before
 	public void setup() {
 		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		syntaxHighlighter = (SyntaxHighlighter) context.getBean("syntaxHighlighter");
+		ISyntaxHighlighter = (ISyntaxHighlighter) context.getBean("ISyntaxHighlighter");
 	}
 	
 	@Test(expected=SyntaxHighlightingException.class)
 	public void shouldReportThatStyleCannotBeAppliedOnNull() {
-		String sentence = null;
-		syntaxHighlighter.highlightThis(sentence);
+		ISyntaxHighlighter.highlightThis(null);
 	}
 	
 	@Test(expected=SyntaxHighlightingException.class)
 	public void shouldReportThatStyleCannotBeAppliedOnBlank() {
 		String sentence = "";
-		syntaxHighlighter.highlightThis(sentence);
+		ISyntaxHighlighter.highlightThis(sentence);
 	}
 
 	@Test(expected=SyntaxHighlightingException.class)
 	public void shouldReportThatStyleCannotBeAppliedOnWhiteSpaces() {
 		String sentence = "     ";
-		syntaxHighlighter.highlightThis(sentence);
+		ISyntaxHighlighter.highlightThis(sentence);
 	}
 
 	@Test
@@ -46,7 +45,7 @@ public class ISyntaxHighlighterTest {
 		String sentence = "I know everything, so it's waste of effort.";
 		String expectedHighlightedSentence = "I know everything, so it's waste of effort.";
 
-		String highlightSentence = syntaxHighlighter.highlightThis(sentence);
+		String highlightSentence = ISyntaxHighlighter.highlightThis(sentence);
 
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
@@ -56,7 +55,7 @@ public class ISyntaxHighlighterTest {
 		String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
 		String expectedHighlightedSentence = "I [bold]am[/bold] going [italic]to[/italic] join java mentoring program [italic]to[/italic] learn cool stuff [underline]in[/underline] fun way.";
 
-		String highlightSentence = syntaxHighlighter.highlightThis(sentence);
+		String highlightSentence = ISyntaxHighlighter.highlightThis(sentence);
 
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
@@ -66,7 +65,7 @@ public class ISyntaxHighlighterTest {
 		String sentence = "I am going in now.";
 		String expectedHighlightedSentence = "I [bold]am[/bold] going [underline]in[/underline] now.";
 
-		String highlightSentence = syntaxHighlighter.highlightThis(sentence);
+		String highlightSentence = ISyntaxHighlighter.highlightThis(sentence);
 
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
@@ -76,7 +75,7 @@ public class ISyntaxHighlighterTest {
 		String sentence = "I will go in.";
 		String expectedHighlightedSentence = "I will go [underline]in[/underline].";
 
-		String highlightSentence = syntaxHighlighter.highlightThis(sentence);
+		String highlightSentence = ISyntaxHighlighter.highlightThis(sentence);
 
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}

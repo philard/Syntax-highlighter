@@ -5,9 +5,6 @@ import com.epam.training.word.IWordHighlighter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Philip_John_Ardley on 13-Mar-17.
- */
 public class SimpleWordHighlighter implements IWordHighlighter {
 
     private String prefix;
@@ -23,7 +20,7 @@ public class SimpleWordHighlighter implements IWordHighlighter {
     }
 
     @Override
-    public String highlightThis(String sentence) {
+    public String highlightSentence(String sentence) {
 
         String highlightedWord = prefix + word + postfix;
         sentence = sentence.replaceAll("(?<=\\s)" + word + "(?=\\s|\\.)", highlightedWord);

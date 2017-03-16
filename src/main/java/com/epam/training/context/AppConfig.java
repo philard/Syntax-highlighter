@@ -1,10 +1,10 @@
 package com.epam.training.context;
 
-import com.epam.training.sentence.SyntaxHighlighter;
+import com.epam.training.sentence.ISyntaxHighlighter;
+import com.epam.training.sentence.impl.ISyntaxHighlighterImpl;
 import com.epam.training.validation.impl.SentenceValidatorImpl;
 import com.epam.training.word.IWordHighlighter;
 import com.epam.training.word.impl.SimpleWordHighlighter;
-import com.epam.training.sentence.impl.SyntaxHighlighterImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
@@ -16,8 +16,8 @@ public class AppConfig {
 
     @Bean(name="syntaxHighlighter")
     @Description("a bean called syntaxHighlighter")
-    public SyntaxHighlighter syntaxHighlighter() {
-        SyntaxHighlighterImpl syntaxHighlighter = new SyntaxHighlighterImpl();
+    public ISyntaxHighlighter syntaxHighlighter() {
+        ISyntaxHighlighterImpl syntaxHighlighter = new ISyntaxHighlighterImpl();
         syntaxHighlighter.setWordHighlighters(wordHighlighters());
         syntaxHighlighter.setSentenceValidatorImpl(new SentenceValidatorImpl());
 
@@ -25,7 +25,7 @@ public class AppConfig {
     }
 
     private ArrayList<IWordHighlighter> wordHighlighters() {
-        ArrayList<IWordHighlighter> wordHighlighters = new ArrayList();
+        ArrayList<IWordHighlighter> wordHighlighters = new ArrayList<IWordHighlighter>();
         wordHighlighters.add(getAmWordHighlighter());
         wordHighlighters.add(getToWordHighlighter());
         wordHighlighters.add(getInWordHighlighter());

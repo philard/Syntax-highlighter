@@ -5,9 +5,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by Philip on 14/03/2017.
- */
 public class SimpleWordHighligherTest {
 
     private SimpleWordHighlighter simpleWordHighlighter;
@@ -22,7 +19,7 @@ public class SimpleWordHighligherTest {
         String sentence = "I know everything, so it's waste of effort.";
         String expectedHighlightedSentence = "I know everything, so it's waste of effort.";
 
-        String highlightSentence = simpleWordHighlighter.highlightThis(sentence);
+        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }
@@ -32,8 +29,8 @@ public class SimpleWordHighligherTest {
         String sentence = "I'm in ";
         String expectedHighlightedSentence = "I'm [underline]in[/underline] ";
 
-        String highlightSentence = simpleWordHighlighter.highlightThis(sentence);
-        highlightSentence = simpleWordHighlighter.highlightThis(highlightSentence);
+        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
+        highlightSentence = simpleWordHighlighter.highlightSentence(highlightSentence);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
 
@@ -44,7 +41,7 @@ public class SimpleWordHighligherTest {
         String sentence = "I'm going ";
         String expectedHighlightedSentence = "I'm going ";
 
-        String highlightSentence = simpleWordHighlighter.highlightThis(sentence);
+        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }
@@ -54,7 +51,7 @@ public class SimpleWordHighligherTest {
         String sentence = "I'm in.";
         String expectedHighlightedSentence = "I'm [underline]in[/underline].";
 
-        String highlightSentence = simpleWordHighlighter.highlightThis(sentence);
+        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }
@@ -64,7 +61,7 @@ public class SimpleWordHighligherTest {
         String sentence = "I will go in.";
         String expectedHighlightedSentence = "I will go [underline]in[/underline].";
 
-        String highlightSentence = simpleWordHighlighter.highlightThis(sentence);
+        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }

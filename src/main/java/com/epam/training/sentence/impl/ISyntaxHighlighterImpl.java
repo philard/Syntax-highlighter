@@ -1,13 +1,13 @@
 package com.epam.training.sentence.impl;
 
 import com.epam.training.exception.SyntaxHighlightingException;
-import com.epam.training.sentence.SyntaxHighlighter;
+import com.epam.training.sentence.ISyntaxHighlighter;
 import com.epam.training.validation.impl.SentenceValidatorImpl;
 import com.epam.training.word.IWordHighlighter;
 
 import java.util.ArrayList;
 
-public class SyntaxHighlighterImpl implements SyntaxHighlighter {
+public class ISyntaxHighlighterImpl implements ISyntaxHighlighter {
 
 	private SentenceValidatorImpl sentenceValidatorImpl;
 
@@ -34,7 +34,7 @@ public class SyntaxHighlighterImpl implements SyntaxHighlighter {
 		sentenceValidatorImpl.validate(sentence);
 
 		for(IWordHighlighter wordHighlighter: wordHighlighters) {
-			sentence = wordHighlighter.highlightThis(sentence);
+			sentence = wordHighlighter.highlightSentence(sentence);
 		}
 		return sentence;
 	}
