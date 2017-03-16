@@ -2,21 +2,21 @@ package com.epam.training.sentence.impl;
 
 import com.epam.training.exception.SyntaxHighlightingException;
 import com.epam.training.sentence.SyntaxHighlighter;
-import com.epam.training.validation.impl.SentenceValidator;
+import com.epam.training.validation.impl.SentenceValidatorImpl;
 import com.epam.training.word.IWordHighlighter;
 
 import java.util.ArrayList;
 
 public class SyntaxHighlighterImpl implements SyntaxHighlighter {
 
-	private SentenceValidator sentenceValidator;
+	private SentenceValidatorImpl sentenceValidatorImpl;
 
-	public SentenceValidator getSentenceValidator() {
-		return sentenceValidator;
+	public SentenceValidatorImpl getSentenceValidatorImpl() {
+		return sentenceValidatorImpl;
 	}
 
-	public void setSentenceValidator(SentenceValidator sentenceValidator) {
-		this.sentenceValidator = sentenceValidator;
+	public void setSentenceValidatorImpl(SentenceValidatorImpl sentenceValidatorImpl) {
+		this.sentenceValidatorImpl = sentenceValidatorImpl;
 	}
 
 	private ArrayList<IWordHighlighter> wordHighlighters;
@@ -31,7 +31,7 @@ public class SyntaxHighlighterImpl implements SyntaxHighlighter {
 
 	public String highlightThis(String sentence) throws SyntaxHighlightingException {
 
-		sentenceValidator.validate(sentence);
+		sentenceValidatorImpl.validate(sentence);
 
 		for(IWordHighlighter wordHighlighter: wordHighlighters) {
 			sentence = wordHighlighter.highlightThis(sentence);

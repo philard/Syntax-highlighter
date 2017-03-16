@@ -1,7 +1,7 @@
 package com.epam.training.context;
 
 import com.epam.training.sentence.SyntaxHighlighter;
-import com.epam.training.validation.impl.SentenceValidator;
+import com.epam.training.validation.impl.SentenceValidatorImpl;
 import com.epam.training.word.IWordHighlighter;
 import com.epam.training.word.impl.SimpleWordHighlighter;
 import com.epam.training.sentence.impl.SyntaxHighlighterImpl;
@@ -19,7 +19,7 @@ public class AppConfig {
     public SyntaxHighlighter syntaxHighlighter() {
         SyntaxHighlighterImpl syntaxHighlighter = new SyntaxHighlighterImpl();
         syntaxHighlighter.setWordHighlighters(wordHighlighters());
-        syntaxHighlighter.setSentenceValidator(new SentenceValidator());
+        syntaxHighlighter.setSentenceValidatorImpl(new SentenceValidatorImpl());
 
         return syntaxHighlighter;
     }

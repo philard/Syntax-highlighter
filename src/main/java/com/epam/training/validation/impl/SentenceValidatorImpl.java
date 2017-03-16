@@ -7,7 +7,7 @@ import com.epam.training.validation.ISentenceValidator;
 /**
  * Created by Philip_John_Ardley on 13-Mar-17.
  */
-public class SentenceValidator implements ISentenceValidator {
+public class SentenceValidatorImpl implements ISentenceValidator {
 
     @Override
     public void validate(String sentence) {
