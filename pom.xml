@@ -4,8 +4,20 @@
 	<groupId>com.epam.training</groupId>
 	<artifactId>syntax-highlighter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-	<properties>
+    <properties>
 		<springframework.version>4.0.6.RELEASE</springframework.version>
 	</properties>
 

@@ -1,4 +1,4 @@
-package com.epam.training;
+package com.epam.training.exception;
 
 public class SyntaxHighlightingException extends RuntimeException {
 

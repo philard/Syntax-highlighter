@@ -1,5 +1,6 @@
 package com.epam.training;
 
+import com.epam.training.word.impl.SimpleWordHighlighter;
 import org.junit.Before;
 import org.junit.Test;
 

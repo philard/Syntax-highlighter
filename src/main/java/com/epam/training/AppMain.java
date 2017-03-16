@@ -1,5 +1,7 @@
 package com.epam.training;
 
+import com.epam.training.context.AppConfig;
+import com.epam.training.sentence.SyntaxHighlighter;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 

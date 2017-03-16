@@ -1,5 +1,10 @@
-package com.epam.training;
+package com.epam.training.context;
 
+import com.epam.training.sentence.SyntaxHighlighter;
+import com.epam.training.validation.SentenceValidator;
+import com.epam.training.word.IWordHighlighter;
+import com.epam.training.word.impl.SimpleWordHighlighter;
+import com.epam.training.sentence.impl.SyntaxHighlighterImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
