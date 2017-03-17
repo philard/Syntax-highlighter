@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
  */
 public class SyntaxHightlighterImplTest {
 
-    private ISyntaxHighlighterImpl syntaxHighlighter;
+    private SyntaxHighlighterImpl syntaxHighlighter;
 
     private IWordHighlighter amHighlighter;
     private SimpleWordHighlighter inHighlighter;
@@ -28,7 +28,7 @@ public class SyntaxHightlighterImplTest {
 
     @Before
     public void buildMocksBeforeTests() {
-        syntaxHighlighter = new ISyntaxHighlighterImpl();
+        syntaxHighlighter = new SyntaxHighlighterImpl();
 
         syntaxHighlighter.setSentenceValidatorImpl(buildSentenceValidator());
 

@@ -1,7 +1,7 @@
 package com.epam.training.context;
 
 import com.epam.training.sentence.ISyntaxHighlighter;
-import com.epam.training.sentence.impl.ISyntaxHighlighterImpl;
+import com.epam.training.sentence.impl.SyntaxHighlighterImpl;
 import com.epam.training.validation.impl.SentenceValidatorImpl;
 import com.epam.training.word.IWordHighlighter;
 import com.epam.training.word.impl.SimpleWordHighlighter;
@@ -17,7 +17,7 @@ public class AppConfig {
     @Bean(name="syntaxHighlighter")
     @Description("a bean called syntaxHighlighter")
     public ISyntaxHighlighter syntaxHighlighter() {
-        ISyntaxHighlighterImpl syntaxHighlighter = new ISyntaxHighlighterImpl();
+        SyntaxHighlighterImpl syntaxHighlighter = new SyntaxHighlighterImpl();
         syntaxHighlighter.setWordHighlighters(wordHighlighters());
         syntaxHighlighter.setSentenceValidatorImpl(new SentenceValidatorImpl());
 

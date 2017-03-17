@@ -7,7 +7,7 @@ import com.epam.training.word.IWordHighlighter;
 
 import java.util.ArrayList;
 
-public class ISyntaxHighlighterImpl implements ISyntaxHighlighter {
+public class SyntaxHighlighterImpl implements ISyntaxHighlighter {
 
 	private SentenceValidatorImpl sentenceValidatorImpl;
 

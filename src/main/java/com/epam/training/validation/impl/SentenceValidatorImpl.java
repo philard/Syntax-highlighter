@@ -10,12 +10,11 @@ import com.epam.training.validation.ISentenceValidator;
 public class SentenceValidatorImpl implements ISentenceValidator {
 
     @Override
-    public void validate(String sentence) {
+    public boolean validate(String sentence) {
         if(sentence == null || sentence == "")
             throw new SyntaxHighlightingException();
         if(sentence.matches("\\s*"))
             throw new SyntaxHighlightingException();
-        System.out.println(sentence + " passed validator. sentence matches ^\\s+ = " + sentence.matches("\\s+"));
-
+        return true;
     }
 }
