@@ -27,7 +27,7 @@ public class SyntaxHighlighterImpTest {
     private SyntaxHighlighterImp noWordsSyntaxHighlighterImp;
 
     @Before
-    public void buildMocksBeforeTests() {
+    public void setupAmToInWordsSyntaxHighlighterImp() {
         amInWordsSyntaxHighlighterImp = new SyntaxHighlighterImp(buildSentenceValidator());
         amInWordsSyntaxHighlighterImp.setWordHighlighters(buildWordHighlighters());
     }
@@ -50,7 +50,7 @@ public class SyntaxHighlighterImpTest {
     }
 
     private SentenceValidatorImp extendSentenceValidator(SentenceValidatorImp mock
-                , String input, Exception throwable) {
+            , String input, Exception throwable) {
         doThrow(throwable)
                 .when(mock).validate(input);
         return mock;
@@ -63,18 +63,18 @@ public class SyntaxHighlighterImpTest {
         return wordHighlighter;
     }
 
-    @Test(expected=SyntaxHighlightingException.class)
+    @Test(expected = SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedOnNull() {
         amInWordsSyntaxHighlighterImp.highlightThis(null);
     }
 
-    @Test(expected=SyntaxHighlightingException.class)
+    @Test(expected = SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedOnBlank() {
         String sentence = "";
         amInWordsSyntaxHighlighterImp.highlightThis(sentence);
     }
 
-    @Test(expected=SyntaxHighlightingException.class)
+    @Test(expected = SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedOnWhiteSpaces() {
         String sentence = "     ";
         amInWordsSyntaxHighlighterImp.highlightThis(sentence);
@@ -128,11 +128,26 @@ public class SyntaxHighlighterImpTest {
         String highlightSentence = amInWordsSyntaxHighlighterImp.highlightThis(sentence);
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }
-    
+
     @Before
-    public void buildNoWordsSyntaxHighlighter() {
+    public void setupNoWordsSyntaxHighlighter() {
         noWordsSyntaxHighlighterImp = new SyntaxHighlighterImp(buildSentenceValidator());
-        
-        
+        noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
+    }
+
+    @Test
+    public void shouldNotApplyStylesWhenNoWordHighlighterAndThisSentence() {
+        String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
+        String expectedHighlightedSentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
+
+        String highlightSentence = noWordsSyntaxHighlighterImp.highlightThis(sentence);
+
+        assertEquals(expectedHighlightedSentence, highlightSentence);
+    }
+
+    @Test(expected = SyntaxHighlightingException.class)
+    public void shouldReportThatStyleCannotBeAppliedWhenNoWordsHighlighterAndWhiteSpaces() {
+        String sentence = "     ";
+        amInWordsSyntaxHighlighterImp.highlightThis(sentence);
     }
 }

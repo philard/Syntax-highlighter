@@ -22,11 +22,9 @@ public class SyntaxHighlighterImpIntegrationTest {
 	private SyntaxHighlighterImp noWordsSyntaxHighlighterImp;
 	
 	@Before
-	public void setup() {
+	public void setupAmToInWordsSyntaxHighlighterImp() {
 		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		amToInWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighter"); //Check scope is prototype. 
-		noWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighter");
-		noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
+		amToInWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighter");
 	}
 	
 	@Test(expected=SyntaxHighlightingException.class)
@@ -85,15 +83,29 @@ public class SyntaxHighlighterImpIntegrationTest {
 
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
+
+	@Before
+	public void setupNoWordsSyntaxHighlighterImp() {
+		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		
+		noWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighter"); //Check scope is prototype.
+		noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
+	}
 	
 	@Test
-	public void shouldNotApplyStylesWhenNoWordHighlighterAndThisSentence() {
+	public void shouldNotApplyStylesWhenNoWordsHighlighterAndThisSentence() {
 		String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
 		String expectedHighlightedSentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
 		
 		String highlightSentence = noWordsSyntaxHighlighterImp.highlightThis(sentence);
 		
 		assertEquals(expectedHighlightedSentence, highlightSentence);
+	}
+
+	@Test(expected = SyntaxHighlightingException.class)
+	public void shouldReportThatStyleCannotBeAppliedWhenNoWordsHighlighterAndWhiteSpaces() {
+		String sentence = "     ";
+		noWordsSyntaxHighlighterImp.highlightThis(sentence);
 	}
 	
 }
