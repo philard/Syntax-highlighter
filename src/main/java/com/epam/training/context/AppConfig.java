@@ -8,6 +8,7 @@ import com.epam.training.word.impl.SimpleWordHighlighter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.context.annotation.Scope;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class AppConfig {
 
     @Bean(name="syntaxHighlighter")
+    @Scope("prototype")
     @Description("a bean called syntaxHighlighter")
     public SyntaxHighlighter syntaxHighlighter() {
         SyntaxHighlighterImp syntaxHighlighter = new SyntaxHighlighterImp(new SentenceValidatorImp());
