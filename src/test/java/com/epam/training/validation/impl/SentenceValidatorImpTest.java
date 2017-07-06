@@ -7,31 +7,31 @@ import org.junit.Test;
 /**
  * Created by Philip on 15/03/2017.
  */
-public class SentenceValidatorImplTest {
+public class SentenceValidatorImpTest {
 
-    private SentenceValidatorImpl sentenceValidatorImpl;
+    private SentenceValidatorImp sentenceValidatorImp;
 
     @Before
     public void setup() {
-        sentenceValidatorImpl = new SentenceValidatorImpl();
+        sentenceValidatorImp = new SentenceValidatorImp();
     }
 
     @Test(expected=SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedOnNull() {
         String sentence = null;
-        sentenceValidatorImpl.validate(sentence);
+        sentenceValidatorImp.validate(sentence);
     }
 
     @Test(expected=SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedOnBlank() {
         String sentence = "";
-        sentenceValidatorImpl.validate(sentence);
+        sentenceValidatorImp.validate(sentence);
     }
 
     @Test(expected=SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedOnWhiteSpaces() {
         String sentence = "     ";
-        sentenceValidatorImpl.validate(sentence);
+        sentenceValidatorImp.validate(sentence);
     }
 
 }

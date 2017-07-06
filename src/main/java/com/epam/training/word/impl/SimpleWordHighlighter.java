@@ -1,11 +1,8 @@
 package com.epam.training.word.impl;
 
-import com.epam.training.word.IWordHighlighter;
+import com.epam.training.word.WordHighlighter;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class SimpleWordHighlighter implements IWordHighlighter {
+public class SimpleWordHighlighter implements WordHighlighter {
 
     private String prefix;
 

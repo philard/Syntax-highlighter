@@ -1,6 +1,6 @@
 package com.epam.training.validation;
 
-public interface ISentenceValidator {
+public interface SentenceValidator {
 
     boolean validate(String sentence);
 }

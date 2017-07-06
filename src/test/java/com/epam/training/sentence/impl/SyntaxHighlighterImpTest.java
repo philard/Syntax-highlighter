@@ -1,8 +1,8 @@
 package com.epam.training.sentence.impl;
 
 import com.epam.training.exception.SyntaxHighlightingException;
-import com.epam.training.validation.impl.SentenceValidatorImpl;
-import com.epam.training.word.IWordHighlighter;
+import com.epam.training.validation.impl.SentenceValidatorImp;
+import com.epam.training.word.WordHighlighter;
 import com.epam.training.word.impl.SimpleWordHighlighter;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,32 +18,32 @@ import static org.mockito.Mockito.*;
  *
  * I could have mocked with all 3 word highlighters but didn't think it necessary - see integration test.
  */
-public class SyntaxHightlighterImplTest {
+public class SyntaxHighlighterImpTest {
 
-    private SyntaxHighlighterImpl syntaxHighlighter;
+    private SyntaxHighlighterImp syntaxHighlighter;
 
-    private IWordHighlighter amHighlighter;
+    private WordHighlighter amHighlighter;
     private SimpleWordHighlighter inHighlighter;
-    private ArrayList<IWordHighlighter> wordHighlighters;
+    private ArrayList<WordHighlighter> wordHighlighters;
 
     @Before
     public void buildMocksBeforeTests() {
-        syntaxHighlighter = new SyntaxHighlighterImpl(buildSentenceValidator());
+        syntaxHighlighter = new SyntaxHighlighterImp(buildSentenceValidator());
 
         wordHighlighters = buildWordHighlighters();
         syntaxHighlighter.setWordHighlighters(wordHighlighters);
     }
 
-    private SentenceValidatorImpl buildSentenceValidator() {
-        SentenceValidatorImpl sentenceValidatorImplMock = Mockito.mock(SentenceValidatorImpl.class);
-        extendSentenceValidator(sentenceValidatorImplMock, null, new SyntaxHighlightingException(""));
-        extendSentenceValidator(sentenceValidatorImplMock, "", new SyntaxHighlightingException(""));
-        extendSentenceValidator(sentenceValidatorImplMock, "     ", new SyntaxHighlightingException(""));
-        return sentenceValidatorImplMock;
+    private SentenceValidatorImp buildSentenceValidator() {
+        SentenceValidatorImp sentenceValidatorImpMock = Mockito.mock(SentenceValidatorImp.class);
+        extendSentenceValidator(sentenceValidatorImpMock, null, new SyntaxHighlightingException(""));
+        extendSentenceValidator(sentenceValidatorImpMock, "", new SyntaxHighlightingException(""));
+        extendSentenceValidator(sentenceValidatorImpMock, "     ", new SyntaxHighlightingException(""));
+        return sentenceValidatorImpMock;
     }
 
-    private ArrayList<IWordHighlighter> buildWordHighlighters() {
-        wordHighlighters = new ArrayList<IWordHighlighter>();
+    private ArrayList<WordHighlighter> buildWordHighlighters() {
+        wordHighlighters = new ArrayList<WordHighlighter>();
         amHighlighter = mock(SimpleWordHighlighter.class);
         inHighlighter = mock(SimpleWordHighlighter.class);
         wordHighlighters.add(amHighlighter);
@@ -51,15 +51,15 @@ public class SyntaxHightlighterImplTest {
         return wordHighlighters;
     }
 
-    private SentenceValidatorImpl extendSentenceValidator(SentenceValidatorImpl mock
+    private SentenceValidatorImp extendSentenceValidator(SentenceValidatorImp mock
                 , String input, Exception throwable) {
         doThrow(throwable)
                 .when(mock).validate(input);
         return mock;
     }
 
-    private IWordHighlighter extendWordHighlighter(IWordHighlighter wordHighlighter,
-                                                   String input, String output) {
+    private WordHighlighter extendWordHighlighter(WordHighlighter wordHighlighter,
+                                                  String input, String output) {
         when(wordHighlighter.highlightSentence(input))
                 .thenReturn(output);
         return wordHighlighter;

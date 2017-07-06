@@ -4,23 +4,23 @@ import static org.junit.Assert.assertEquals;
 
 import com.epam.training.context.AppConfig;
 import com.epam.training.exception.SyntaxHighlightingException;
-import com.epam.training.sentence.ISyntaxHighlighter;
+import com.epam.training.sentence.SyntaxHighlighter;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
 /**
- * SyntaxHighlighterImpl is now composed of services. This is an integration test class to test it.
+ * SyntaxHighlighterImp is now composed of services. This is an integration test class to test it.
  */
-public class ISyntaxHighlighterTest {
+public class SyntaxHighlighterImpIntegrationTest {
 
-	private ISyntaxHighlighter syntaxHighlighter;
+	private SyntaxHighlighter syntaxHighlighter;
 	
 	@Before
 	public void setup() {
 		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		syntaxHighlighter = (ISyntaxHighlighter) context.getBean("syntaxHighlighter");
+		syntaxHighlighter = (SyntaxHighlighter) context.getBean("syntaxHighlighter");
 	}
 	
 	@Test(expected=SyntaxHighlightingException.class)

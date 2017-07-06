@@ -1,6 +1,6 @@
 package com.epam.training.word;
 
-public interface IWordHighlighter {
+public interface WordHighlighter {
 
     String highlightSentence(String sentence);
 }
