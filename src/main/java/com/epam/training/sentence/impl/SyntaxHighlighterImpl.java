@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public class SyntaxHighlighterImpl implements ISyntaxHighlighter {
 
-	private ISentenceValidator sentenceValidatorImpl;
+    public SyntaxHighlighterImpl(ISentenceValidator sentenceValidatorImpl) {
+        this.sentenceValidatorImpl = sentenceValidatorImpl;
+    }
+	
+    private ISentenceValidator sentenceValidatorImpl;
 
 	public ISentenceValidator getSentenceValidatorImpl() {
 		return sentenceValidatorImpl;
-	}
-
-	public void setSentenceValidatorImpl(ISentenceValidator sentenceValidatorImpl) {
-		this.sentenceValidatorImpl = sentenceValidatorImpl;
 	}
 
 	private ArrayList<IWordHighlighter> wordHighlighters;

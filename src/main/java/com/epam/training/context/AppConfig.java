@@ -17,10 +17,8 @@ public class AppConfig {
     @Bean(name="syntaxHighlighter")
     @Description("a bean called syntaxHighlighter")
     public ISyntaxHighlighter syntaxHighlighter() {
-        SyntaxHighlighterImpl syntaxHighlighter = new SyntaxHighlighterImpl();
+        SyntaxHighlighterImpl syntaxHighlighter = new SyntaxHighlighterImpl(new SentenceValidatorImpl());
         syntaxHighlighter.setWordHighlighters(wordHighlighters());
-        syntaxHighlighter.setSentenceValidatorImpl(new SentenceValidatorImpl());
-
         return syntaxHighlighter;
     }
 

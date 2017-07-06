@@ -28,9 +28,7 @@ public class SyntaxHightlighterImplTest {
 
     @Before
     public void buildMocksBeforeTests() {
-        syntaxHighlighter = new SyntaxHighlighterImpl();
-
-        syntaxHighlighter.setSentenceValidatorImpl(buildSentenceValidator());
+        syntaxHighlighter = new SyntaxHighlighterImpl(buildSentenceValidator());
 
         wordHighlighters = buildWordHighlighters();
         syntaxHighlighter.setWordHighlighters(wordHighlighters);
@@ -44,13 +42,6 @@ public class SyntaxHightlighterImplTest {
         return sentenceValidatorImplMock;
     }
 
-    private SentenceValidatorImpl extendSentenceValidator(SentenceValidatorImpl mock
-            , String input, Exception throwable) {
-        doThrow(throwable)
-                .when(mock).validate(input);
-        return mock;
-    }
-
     private ArrayList<IWordHighlighter> buildWordHighlighters() {
         wordHighlighters = new ArrayList<IWordHighlighter>();
         amHighlighter = mock(SimpleWordHighlighter.class);
@@ -58,6 +49,13 @@ public class SyntaxHightlighterImplTest {
         wordHighlighters.add(amHighlighter);
         wordHighlighters.add(inHighlighter);
         return wordHighlighters;
+    }
+
+    private SentenceValidatorImpl extendSentenceValidator(SentenceValidatorImpl mock
+                , String input, Exception throwable) {
+        doThrow(throwable)
+                .when(mock).validate(input);
+        return mock;
     }
 
     private IWordHighlighter extendWordHighlighter(IWordHighlighter wordHighlighter,
