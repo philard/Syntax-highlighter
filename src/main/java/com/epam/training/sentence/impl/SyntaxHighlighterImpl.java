@@ -5,7 +5,7 @@ import com.epam.training.sentence.ISyntaxHighlighter;
 import com.epam.training.validation.ISentenceValidator;
 import com.epam.training.word.IWordHighlighter;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 public class SyntaxHighlighterImpl implements ISyntaxHighlighter {
 
@@ -19,13 +19,13 @@ public class SyntaxHighlighterImpl implements ISyntaxHighlighter {
 		return sentenceValidatorImpl;
 	}
 
-	private ArrayList<IWordHighlighter> wordHighlighters;
+	private Collection<IWordHighlighter> wordHighlighters;
 
-	public ArrayList<IWordHighlighter> getWordHighlighters() {
+	public Collection<IWordHighlighter> getWordHighlighters() {
 		return wordHighlighters;
 	}
 
-	public void setWordHighlighters(ArrayList<IWordHighlighter> wordHighlighters) {
+	public void setWordHighlighters(Collection<IWordHighlighter> wordHighlighters) {
 		this.wordHighlighters = wordHighlighters;
 	}
 
