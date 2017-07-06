@@ -2,20 +2,20 @@ package com.epam.training.sentence.impl;
 
 import com.epam.training.exception.SyntaxHighlightingException;
 import com.epam.training.sentence.ISyntaxHighlighter;
-import com.epam.training.validation.impl.SentenceValidatorImpl;
+import com.epam.training.validation.ISentenceValidator;
 import com.epam.training.word.IWordHighlighter;
 
 import java.util.ArrayList;
 
 public class SyntaxHighlighterImpl implements ISyntaxHighlighter {
 
-	private SentenceValidatorImpl sentenceValidatorImpl;
+	private ISentenceValidator sentenceValidatorImpl;
 
-	public SentenceValidatorImpl getSentenceValidatorImpl() {
+	public ISentenceValidator getSentenceValidatorImpl() {
 		return sentenceValidatorImpl;
 	}
 
-	public void setSentenceValidatorImpl(SentenceValidatorImpl sentenceValidatorImpl) {
+	public void setSentenceValidatorImpl(ISentenceValidator sentenceValidatorImpl) {
 		this.sentenceValidatorImpl = sentenceValidatorImpl;
 	}
 
