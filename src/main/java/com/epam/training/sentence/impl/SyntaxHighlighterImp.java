@@ -9,14 +9,14 @@ import java.util.Collection;
 
 public class SyntaxHighlighterImp implements SyntaxHighlighter {
 
-    public SyntaxHighlighterImp(SentenceValidator sentenceValidatorImpl) {
-        this.sentenceValidatorImpl = sentenceValidatorImpl;
+    public SyntaxHighlighterImp(SentenceValidator sentenceValidator) {
+        this.sentenceValidator = sentenceValidator;
     }
 	
-    private SentenceValidator sentenceValidatorImpl;
+    private SentenceValidator sentenceValidator;
 
-	public SentenceValidator getSentenceValidatorImpl() {
-		return sentenceValidatorImpl;
+	public SentenceValidator getSentenceValidator() {
+		return sentenceValidator;
 	}
 
 	private Collection<WordHighlighter> wordHighlighters;
@@ -31,7 +31,7 @@ public class SyntaxHighlighterImp implements SyntaxHighlighter {
 
 	public String highlightThis(String sentence) throws SyntaxHighlightingException {
 
-		sentenceValidatorImpl.validate(sentence);
+		sentenceValidator.validate(sentence);
 
 		for(WordHighlighter wordHighlighter: wordHighlighters) {
 			sentence = wordHighlighter.highlightSentence(sentence);
