@@ -57,12 +57,16 @@ public class AppConfig {
         colorWordHighlighters.add(getAmWordHighlighter());
         colorWordHighlighters.add(getToWordHighlighter());
         colorWordHighlighters.add(getInWordHighlighter());
-        colorWordHighlighters.add(getJavaWordHighlighter());
+        colorWordHighlighters.add(getJavaWordRedHighlighter());
+        colorWordHighlighters.add(getToWordYellowHighlighter());
         return colorWordHighlighters;
     }
 
-
-    private ColorWordHighlighter getJavaWordHighlighter() {
+    private ColorWordHighlighter getJavaWordRedHighlighter() {
         return new ColorWordHighlighter("[red]", "java", "[/red]");
+    }
+    
+    private ColorWordHighlighter getToWordYellowHighlighter() {
+        return new ColorWordHighlighter("[yellow]", "to", "[/yellow]");
     }
 }
