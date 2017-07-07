@@ -115,5 +115,13 @@ public class SyntaxHighlighterImpWithColorIntegrationTest {
 		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
+
+	@Test
+	public void shouldApplyToTheWordToYellowOnTopOfItalic() {
+		String sentence = "I going to join";
+		String expectedHighlightedSentence = "I going [italic][yellow]to[/yellow][/italic] join";
+		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
+		assertEquals(expectedHighlightedSentence, highlightSentence);
+	}
 	
 }
