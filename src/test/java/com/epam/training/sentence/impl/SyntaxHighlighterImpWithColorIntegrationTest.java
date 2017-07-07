@@ -56,8 +56,8 @@ public class SyntaxHighlighterImpWithColorIntegrationTest {
 
 	@Test
 	public void shouldApplyStyleOnThisSentence() {
-		String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
-		String expectedHighlightedSentence = "I [bold]am[/bold] going [italic]to[/italic] join java mentoring program [italic]to[/italic] learn cool stuff [underline]in[/underline] fun way.";
+		String sentence = "I am going to join,java mentoring program to learn cool stuff in fun way.";
+		String expectedHighlightedSentence = "I [bold]am[/bold] going [italic]to[/italic] join,java mentoring program [italic]to[/italic] learn cool stuff [underline]in[/underline] fun way.";
 
 		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
 

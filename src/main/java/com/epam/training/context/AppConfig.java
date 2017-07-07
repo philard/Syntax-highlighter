@@ -57,6 +57,7 @@ public class AppConfig {
         colorWordHighlighters.add(getAmWordHighlighter());
         colorWordHighlighters.add(getToWordHighlighter());
         colorWordHighlighters.add(getInWordHighlighter());
+        colorWordHighlighters.add(getJavaWordHighlighter());
         return colorWordHighlighters;
     }
 
