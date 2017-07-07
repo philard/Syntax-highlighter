@@ -48,39 +48,31 @@ public class SyntaxHighlighterImpWithColorIntegrationTest {
 	public void shouldNotApplyStyleOnThisSentence() {
 		String sentence = "I know everything, so it's waste of effort.";
 		String expectedHighlightedSentence = "I know everything, so it's waste of effort.";
-
 		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
 
 	@Test
 	public void shouldApplyStyleOnThisSentence() {
 		String sentence = "I am going to join,java mentoring program to learn cool stuff in fun way.";
-		String expectedHighlightedSentence = "I [bold]am[/bold] going [italic]to[/italic] join,java mentoring program [italic]to[/italic] learn cool stuff [underline]in[/underline] fun way.";
-
+		String expectedHighlightedSentence = "I [bold] am [/bold] going [italic] to [/italic] join,java mentoring program [italic] to [/italic] learn cool stuff [underline] in [/underline] fun way.";
 		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
 
 	@Test
 	public void shouldApplyStyleOnlyWhenMatchedWholeWord() {
 		String sentence = "I am going in now.";
-		String expectedHighlightedSentence = "I [bold]am[/bold] going [underline]in[/underline] now.";
-
+		String expectedHighlightedSentence = "I [bold] am [/bold] going [underline] in [/underline] now.";
 		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
 
 	@Test
 	public void shouldApplyStyleWhenMatchedWordIsNextToAFullStop() {
 		String sentence = "I will go in.";
-		String expectedHighlightedSentence = "I will go [underline]in[/underline].";
-
+		String expectedHighlightedSentence = "I will go [underline] in [/underline].";
 		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
 
@@ -96,9 +88,7 @@ public class SyntaxHighlighterImpWithColorIntegrationTest {
 	public void shouldNotApplyStylesWhenNoWordsHighlighterAndThisSentence() {
 		String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
 		String expectedHighlightedSentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
-		
 		String highlightSentence = noWordsSyntaxHighlighterImp.highlightThis(sentence);
-		
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
 
@@ -111,7 +101,7 @@ public class SyntaxHighlighterImpWithColorIntegrationTest {
 	@Test
 	public void shouldApplyRedToTheWordJava() {
 		String sentence = "I going join java mentoring program.";
-		String expectedHighlightedSentence = "I going join [red]java[/red] mentoring program.";
+		String expectedHighlightedSentence = "I going join [red] java [/red] mentoring program.";
 		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}
@@ -119,7 +109,7 @@ public class SyntaxHighlighterImpWithColorIntegrationTest {
 	@Test
 	public void shouldApplyToTheWordToYellowOnTopOfItalic() {
 		String sentence = "I going to join";
-		String expectedHighlightedSentence = "I going [italic][yellow]to[/yellow][/italic] join";
+		String expectedHighlightedSentence = "I going [italic] [yellow] to [/yellow] [/italic] join";
 		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
 		assertEquals(expectedHighlightedSentence, highlightSentence);
 	}

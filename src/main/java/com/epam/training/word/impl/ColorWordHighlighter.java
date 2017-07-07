@@ -16,7 +16,7 @@ public class ColorWordHighlighter implements WordHighlighter {
     
     @Override
     public String highlightSentence(String sentence) {
-        String coloredWord = prefix + word + postfix;
+        String coloredWord = prefix + " " + word + " " + postfix;
         sentence = sentence.replaceAll("(?<=\\s)" + word + "(?=\\s|\\.)", coloredWord);
         
         return sentence;
