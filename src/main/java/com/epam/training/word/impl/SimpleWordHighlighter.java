@@ -19,7 +19,7 @@ public class SimpleWordHighlighter implements WordHighlighter {
     @Override
     public String highlightSentence(String sentence) {
 
-        String highlightedWord = prefix + word + postfix;
+        String highlightedWord = prefix + " " + word + " " + postfix;
         sentence = sentence.replaceAll("(?<=\\s)" + word + "(?=\\s|\\.)", highlightedWord);
 
         return sentence;

@@ -94,10 +94,10 @@ public class SyntaxHighlighterImpTest {
     @Test
     public void shouldApplyStyleOnThisSentence() {
         String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
-        String partialHighlightedSentence = "I [bold]am[/bold] going to join java mentoring program " +
+        String partialHighlightedSentence = "I [bold] am [/bold] going to join java mentoring program " +
                 "to learn cool stuff in fun way.";
-        String expectedHighlightedSentence = "I [bold]am[/bold] going to join java mentoring program " +
-                "to learn cool stuff [underline]in[/underline] fun way.";
+        String expectedHighlightedSentence = "I [bold] am [/bold] going to join java mentoring program " +
+                "to learn cool stuff [underline] in [/underline] fun way.";
         extendWordHighlighter(amWordHighlighter, sentence, partialHighlightedSentence);
         extendWordHighlighter(inWordHighlighter, partialHighlightedSentence, expectedHighlightedSentence);
 
@@ -108,8 +108,8 @@ public class SyntaxHighlighterImpTest {
     @Test
     public void shouldApplyStyleOnlyWhenMatchedWholeWord() {
         String sentence = "I am going in now.";
-        String partialHighlightedSentence = "I [bold]am[/bold] going in now.";
-        String expectedHighlightedSentence = "I [bold]am[/bold] going [underline]in[/underline] now.";
+        String partialHighlightedSentence = "I [bold] am [/bold] going in now.";
+        String expectedHighlightedSentence = "I [bold] am [/bold] going [underline] in [/underline] now.";
         extendWordHighlighter(amWordHighlighter, sentence, partialHighlightedSentence);
         extendWordHighlighter(inWordHighlighter, partialHighlightedSentence, expectedHighlightedSentence);
 
@@ -120,7 +120,7 @@ public class SyntaxHighlighterImpTest {
     @Test
     public void shouldApplyStyleWhenMatchedWordIsNextToAFullStop() {
         String sentence = "I will go in.";
-        String expectedHighlightedSentence = "I will go [underline]in[/underline].";
+        String expectedHighlightedSentence = "I will go [underline] in [/underline].";
 
         extendWordHighlighter(amWordHighlighter, sentence, sentence);
         extendWordHighlighter(inWordHighlighter, sentence, expectedHighlightedSentence);

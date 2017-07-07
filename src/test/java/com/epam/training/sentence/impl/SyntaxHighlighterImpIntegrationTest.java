@@ -57,7 +57,7 @@ public class SyntaxHighlighterImpIntegrationTest {
 	@Test
 	public void shouldApplyStyleOnThisSentence() {
 		String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
-		String expectedHighlightedSentence = "I [bold]am[/bold] going [italic]to[/italic] join java mentoring program [italic]to[/italic] learn cool stuff [underline]in[/underline] fun way.";
+		String expectedHighlightedSentence = "I [bold] am [/bold] going [italic] to [/italic] join java mentoring program [italic] to [/italic] learn cool stuff [underline] in [/underline] fun way.";
 
 		String highlightSentence = amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
 
@@ -67,7 +67,7 @@ public class SyntaxHighlighterImpIntegrationTest {
 	@Test
 	public void shouldApplyStyleOnlyWhenMatchedWholeWord() {
 		String sentence = "I am going in now.";
-		String expectedHighlightedSentence = "I [bold]am[/bold] going [underline]in[/underline] now.";
+		String expectedHighlightedSentence = "I [bold] am [/bold] going [underline] in [/underline] now.";
 
 		String highlightSentence = amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
 
@@ -77,7 +77,7 @@ public class SyntaxHighlighterImpIntegrationTest {
 	@Test
 	public void shouldApplyStyleWhenMatchedWordIsNextToAFullStop() {
 		String sentence = "I will go in.";
-		String expectedHighlightedSentence = "I will go [underline]in[/underline].";
+		String expectedHighlightedSentence = "I will go [underline] in [/underline].";
 
 		String highlightSentence = amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
 
