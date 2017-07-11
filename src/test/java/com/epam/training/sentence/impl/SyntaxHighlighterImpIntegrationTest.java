@@ -23,8 +23,13 @@ public class SyntaxHighlighterImpIntegrationTest {
 
     @Before
     public void setupAmToInWordsSyntaxHighlighterImp() {
-        AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        amToInWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighter");
+        AbstractApplicationContext amToInContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        amToInWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) amToInContext.getBean("syntaxHighlighter");
+
+
+        AbstractApplicationContext noWordsContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        noWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) noWordsContext.getBean("syntaxHighlighter");
+        noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
     }
 
 
@@ -76,13 +81,6 @@ public class SyntaxHighlighterImpIntegrationTest {
         String expected = "I will go [underline] in [/underline].";
         String highlightSentence = amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
         assertEquals(expected, highlightSentence);
-    }
-
-    @Before
-    public void setupNoWordsSyntaxHighlighterImp() {
-        AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        noWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighter"); //Assumes scope is prototype.
-        noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
     }
 
     @Test

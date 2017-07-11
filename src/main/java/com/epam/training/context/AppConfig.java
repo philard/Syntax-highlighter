@@ -4,7 +4,6 @@ import com.epam.training.sentence.SyntaxHighlighter;
 import com.epam.training.sentence.impl.SyntaxHighlighterImp;
 import com.epam.training.validation.impl.SentenceValidatorImp;
 import com.epam.training.word.WordHighlighter;
-import com.epam.training.word.impl.ColorWordHighlighter;
 import com.epam.training.word.impl.SimpleWordHighlighter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,11 +61,11 @@ public class AppConfig {
         return colorWordHighlighters;
     }
 
-    private ColorWordHighlighter getJavaWordRedHighlighter() {
-        return new ColorWordHighlighter("[red]", "java", "[/red]");
+    private SimpleWordHighlighter getJavaWordRedHighlighter() {
+        return new SimpleWordHighlighter("[red]", "java", "[/red]");
     }
     
-    private ColorWordHighlighter getToWordYellowHighlighter() {
-        return new ColorWordHighlighter("[yellow]", "to", "[/yellow]");
+    private SimpleWordHighlighter getToWordYellowHighlighter() {
+        return new SimpleWordHighlighter("[yellow]", "to", "[/yellow]");
     }
 }
