@@ -16,20 +16,21 @@ import static org.mockito.Mockito.*;
 /**
  * Created by Philip on 16/03/2017.
  *
- * I could have mocked with all 3 word highlighters but didn't think it necessary - see integration test.
+ * I mocked all 3 word highlighters. Similar tests for see integration tests.
  */
 public class SyntaxHighlighterImpTest {
 
-    private SyntaxHighlighterImp amInWordsSyntaxHighlighterImp;
-    private WordHighlighter amWordHighlighter;
+    private SyntaxHighlighterImp amToInWordsSyntaxHighlighterImp;
+    private SimpleWordHighlighter amWordHighlighter;
+    private SimpleWordHighlighter toWordHighlighter;
     private SimpleWordHighlighter inWordHighlighter;
-    
+
     private SyntaxHighlighterImp noWordsSyntaxHighlighterImp;
 
     @Before
     public void setupAmToInWordsSyntaxHighlighterImp() {
-        amInWordsSyntaxHighlighterImp = new SyntaxHighlighterImp(buildSentenceValidator());
-        amInWordsSyntaxHighlighterImp.setWordHighlighters(buildWordHighlighters());
+        amToInWordsSyntaxHighlighterImp = new SyntaxHighlighterImp(buildSentenceValidator());
+        amToInWordsSyntaxHighlighterImp.setWordHighlighters(buildWordHighlighters());
     }
 
     private SentenceValidatorImp buildSentenceValidator() {
@@ -43,8 +44,10 @@ public class SyntaxHighlighterImpTest {
     private ArrayList<WordHighlighter> buildWordHighlighters() {
         ArrayList<WordHighlighter> wordHighlighters = new ArrayList<WordHighlighter>();
         amWordHighlighter = mock(SimpleWordHighlighter.class);
+        toWordHighlighter = mock(SimpleWordHighlighter.class);
         inWordHighlighter = mock(SimpleWordHighlighter.class);
         wordHighlighters.add(amWordHighlighter);
+        wordHighlighters.add(toWordHighlighter);
         wordHighlighters.add(inWordHighlighter);
         return wordHighlighters;
     }
@@ -65,89 +68,96 @@ public class SyntaxHighlighterImpTest {
 
     @Test(expected = SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedOnNull() {
-        amInWordsSyntaxHighlighterImp.highlightThis(null);
+        amToInWordsSyntaxHighlighterImp.highlightThis(null);
     }
 
     @Test(expected = SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedOnBlank() {
         String sentence = "";
-        amInWordsSyntaxHighlighterImp.highlightThis(sentence);
+        amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
     }
 
     @Test(expected = SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedOnWhiteSpaces() {
         String sentence = "     ";
-        amInWordsSyntaxHighlighterImp.highlightThis(sentence);
+        amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
     }
 
     @Test
     public void shouldNotApplyStyleOnThisSentence() {
         String sentence = "I know everything, so it's waste of effort.";
-        String expectedHighlightedSentence = "I know everything, so it's waste of effort.";
-        extendWordHighlighter(amWordHighlighter, sentence, expectedHighlightedSentence);
-        extendWordHighlighter(inWordHighlighter, sentence, expectedHighlightedSentence);
+        String expected = "I know everything, so it's waste of effort.";
+        extendWordHighlighter(amWordHighlighter, sentence, expected);
+        extendWordHighlighter(toWordHighlighter, expected, expected);
+        extendWordHighlighter(inWordHighlighter, expected, expected);
 
-        String highlightSentence = amInWordsSyntaxHighlighterImp.highlightThis(sentence);
-        assertEquals(expectedHighlightedSentence, highlightSentence);
+        String highlightSentence = amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expected, highlightSentence);
     }
 
     @Test
     public void shouldApplyStyleOnThisSentence() {
-        String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
-        String partialHighlightedSentence = "I [bold] am [/bold] going to join java mentoring program " +
+        String sentence = "I am going to join,java mentoring program to learn cool stuff in fun way.";
+        String sentenceHighlightedAm = "I [bold] am [/bold] going to join,java mentoring program " +
                 "to learn cool stuff in fun way.";
-        String expectedHighlightedSentence = "I [bold] am [/bold] going to join java mentoring program " +
-                "to learn cool stuff [underline] in [/underline] fun way.";
-        extendWordHighlighter(amWordHighlighter, sentence, partialHighlightedSentence);
-        extendWordHighlighter(inWordHighlighter, partialHighlightedSentence, expectedHighlightedSentence);
+        String sentenceHighlightedTo = "I [bold] am [/bold] going [italic] to [/italic] join,java mentoring program " +
+                "[italic] to [/italic] learn cool stuff in fun way.";
+        String expected  = "I [bold] am [/bold] going to join,java mentoring program " +
+                "[italic] to [/italic] learn cool stuff [underline] in [/underline] fun way.";
+        extendWordHighlighter(amWordHighlighter, sentence, sentenceHighlightedAm);
+        extendWordHighlighter(toWordHighlighter, sentenceHighlightedAm, sentenceHighlightedTo);
+        extendWordHighlighter(inWordHighlighter, sentenceHighlightedTo, expected);
 
-        String highlightSentence = amInWordsSyntaxHighlighterImp.highlightThis(sentence);
-        assertEquals(expectedHighlightedSentence, highlightSentence);
+        String highlightSentence = amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expected, highlightSentence);
     }
 
     @Test
     public void shouldApplyStyleOnlyWhenMatchedWholeWord() {
         String sentence = "I am going in now.";
-        String partialHighlightedSentence = "I [bold] am [/bold] going in now.";
-        String expectedHighlightedSentence = "I [bold] am [/bold] going [underline] in [/underline] now.";
-        extendWordHighlighter(amWordHighlighter, sentence, partialHighlightedSentence);
-        extendWordHighlighter(inWordHighlighter, partialHighlightedSentence, expectedHighlightedSentence);
+        String sentenceHighlightedAm = "I [bold] am [/bold] going in now.";
+        String sentenceHighlightedTo = "I [bold] am [/bold] going in now.";
+        String expected = "I [bold] am [/bold] going [underline] in [/underline] now.";
+        extendWordHighlighter(amWordHighlighter, sentence, sentenceHighlightedAm);
+        extendWordHighlighter(toWordHighlighter, sentenceHighlightedAm, sentenceHighlightedTo);
+        extendWordHighlighter(inWordHighlighter, sentenceHighlightedTo, expected);
 
-        String highlightSentence = amInWordsSyntaxHighlighterImp.highlightThis(sentence);
-        assertEquals(expectedHighlightedSentence, highlightSentence);
+        String highlightSentence = amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expected, highlightSentence);
     }
 
     @Test
     public void shouldApplyStyleWhenMatchedWordIsNextToAFullStop() {
         String sentence = "I will go in.";
-        String expectedHighlightedSentence = "I will go [underline] in [/underline].";
+        String sentenceHighlightedAm = "I will go in.";
+        String sentenceHighlightedTo = "I will go in.";
+        String expected = "I will go [underline] in [/underline].";
+        extendWordHighlighter(amWordHighlighter, sentence, sentenceHighlightedAm);
+        extendWordHighlighter(toWordHighlighter, sentenceHighlightedAm, sentenceHighlightedTo);
+        extendWordHighlighter(inWordHighlighter, sentenceHighlightedTo, expected);
 
-        extendWordHighlighter(amWordHighlighter, sentence, sentence);
-        extendWordHighlighter(inWordHighlighter, sentence, expectedHighlightedSentence);
-
-        String highlightSentence = amInWordsSyntaxHighlighterImp.highlightThis(sentence);
-        assertEquals(expectedHighlightedSentence, highlightSentence);
+        String highlightSentence = amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expected, highlightSentence);
     }
 
     @Before
-    public void setupNoWordsSyntaxHighlighter() {
+    public void setupNoWordsSyntaxHighlighterImp() {
         noWordsSyntaxHighlighterImp = new SyntaxHighlighterImp(buildSentenceValidator());
         noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
     }
 
     @Test
-    public void shouldNotApplyStylesWhenNoWordHighlighterAndThisSentence() {
+    public void shouldNotApplyStylesWhenNoWordsHighlighterAndThisSentence() {
         String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
         String expectedHighlightedSentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
-
         String highlightSentence = noWordsSyntaxHighlighterImp.highlightThis(sentence);
-
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }
 
     @Test(expected = SyntaxHighlightingException.class)
     public void shouldReportThatStyleCannotBeAppliedWhenNoWordsHighlighterAndWhiteSpaces() {
         String sentence = "     ";
-        amInWordsSyntaxHighlighterImp.highlightThis(sentence);
+        noWordsSyntaxHighlighterImp.highlightThis(sentence);
     }
+
 }

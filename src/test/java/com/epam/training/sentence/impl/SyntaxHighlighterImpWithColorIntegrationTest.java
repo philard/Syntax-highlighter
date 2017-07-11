@@ -17,101 +17,101 @@ import static org.junit.Assert.assertEquals;
  */
 public class SyntaxHighlighterImpWithColorIntegrationTest {
 
-	private SyntaxHighlighterImp amToInWordsWithColorSyntaxHighlighterImp;
-	
-	private SyntaxHighlighterImp noWordsSyntaxHighlighterImp;
-	
-	@Before
-	public void setupAmToInWordsSyntaxHighlighterImp() {
-		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		amToInWordsWithColorSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighterWithColor");
-	}
-	
-	@Test(expected=SyntaxHighlightingException.class)
-	public void shouldReportThatStyleCannotBeAppliedOnNull() {
-		amToInWordsWithColorSyntaxHighlighterImp.highlightThis(null);
-	}
-	
-	@Test(expected=SyntaxHighlightingException.class)
-	public void shouldReportThatStyleCannotBeAppliedOnBlank() {
-		String sentence = "";
-		amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-	}
+    private SyntaxHighlighterImp amToInWordsWithColorSyntaxHighlighterImp;
 
-	@Test(expected=SyntaxHighlightingException.class)
-	public void shouldReportThatStyleCannotBeAppliedOnWhiteSpaces() {
-		String sentence = "     ";
-		amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-	}
+    private SyntaxHighlighterImp noWordsSyntaxHighlighterImp;
 
-	@Test
-	public void shouldNotApplyStyleOnThisSentence() {
-		String sentence = "I know everything, so it's waste of effort.";
-		String expectedHighlightedSentence = "I know everything, so it's waste of effort.";
-		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-		assertEquals(expectedHighlightedSentence, highlightSentence);
-	}
+    @Before
+    public void setupAmToInWordsSyntaxHighlighterImp() {
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        amToInWordsWithColorSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighterWithColor");
+    }
 
-	@Test
-	public void shouldApplyStyleOnThisSentence() {
-		String sentence = "I am going to join,java mentoring program to learn cool stuff in fun way.";
-		String expectedHighlightedSentence = "I [bold] am [/bold] going [italic] [yellow] to [/yellow] [/italic] join,java mentoring program [italic] [yellow] to [/yellow] [/italic] learn cool stuff [underline] in [/underline] fun way.";
-		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-		assertEquals(expectedHighlightedSentence, highlightSentence);
-	}
+    @Test(expected = SyntaxHighlightingException.class)
+    public void shouldReportThatStyleCannotBeAppliedOnNull() {
+        amToInWordsWithColorSyntaxHighlighterImp.highlightThis(null);
+    }
 
-	@Test
-	public void shouldApplyStyleOnlyWhenMatchedWholeWord() {
-		String sentence = "I am going in now.";
-		String expectedHighlightedSentence = "I [bold] am [/bold] going [underline] in [/underline] now.";
-		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-		assertEquals(expectedHighlightedSentence, highlightSentence);
-	}
+    @Test(expected = SyntaxHighlightingException.class)
+    public void shouldReportThatStyleCannotBeAppliedOnBlank() {
+        String sentence = "";
+        amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
+    }
 
-	@Test
-	public void shouldApplyStyleWhenMatchedWordIsNextToAFullStop() {
-		String sentence = "I will go in.";
-		String expectedHighlightedSentence = "I will go [underline] in [/underline].";
-		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-		assertEquals(expectedHighlightedSentence, highlightSentence);
-	}
+    @Test(expected = SyntaxHighlightingException.class)
+    public void shouldReportThatStyleCannotBeAppliedOnWhiteSpaces() {
+        String sentence = "     ";
+        amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
+    }
 
-	@Before
-	public void setupNoWordsSyntaxHighlighterImp() {
-		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		
-		noWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighter"); //Check scope is prototype.
-		noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
-	}
-	
-	@Test
-	public void shouldNotApplyStylesWhenNoWordsHighlighterAndThisSentence() {
-		String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
-		String expectedHighlightedSentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
-		String highlightSentence = noWordsSyntaxHighlighterImp.highlightThis(sentence);
-		assertEquals(expectedHighlightedSentence, highlightSentence);
-	}
+    @Test
+    public void shouldNotApplyStyleOnThisSentence() {
+        String sentence = "I know everything, so it's waste of effort.";
+        String expectedHighlightedSentence = "I know everything, so it's waste of effort.";
+        String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expectedHighlightedSentence, highlightSentence);
+    }
 
-	@Test(expected = SyntaxHighlightingException.class)
-	public void shouldReportThatStyleCannotBeAppliedWhenNoWordsHighlighterAndWhiteSpaces() {
-		String sentence = "     ";
-		noWordsSyntaxHighlighterImp.highlightThis(sentence);
-	}
-	
-	@Test
-	public void shouldApplyRedToTheWordJava() {
-		String sentence = "I going join java mentoring program.";
-		String expectedHighlightedSentence = "I going join [red] java [/red] mentoring program.";
-		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-		assertEquals(expectedHighlightedSentence, highlightSentence);
-	}
+    @Test
+    public void shouldApplyStyleOnThisSentence() {
+        String sentence = "I am going to join,java mentoring program to learn cool stuff in fun way.";
+        String expected = "I [bold] am [/bold] going [italic] [yellow] to [/yellow] [/italic] join,java mentoring program " +
+                "[italic] [yellow] to [/yellow] [/italic] learn cool stuff [underline] in [/underline] fun way.";
+        String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expected, highlightSentence);
+    }
 
-	@Test
-	public void shouldApplyToTheWordToYellowOnTopOfItalic() {
-		String sentence = "I going to join";
-		String expectedHighlightedSentence = "I going [italic] [yellow] to [/yellow] [/italic] join";
-		String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
-		assertEquals(expectedHighlightedSentence, highlightSentence);
-	}
-	
+    @Test
+    public void shouldApplyStyleOnlyWhenMatchedWholeWord() {
+        String sentence = "I am going in now.";
+        String expected = "I [bold] am [/bold] going [underline] in [/underline] now.";
+        String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expected, highlightSentence);
+    }
+
+    @Test
+    public void shouldApplyStyleWhenMatchedWordIsNextToAFullStop() {
+        String sentence = "I will go in.";
+        String expected = "I will go [underline] in [/underline].";
+        String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expected, highlightSentence);
+    }
+
+    @Before
+    public void setupNoWordsSyntaxHighlighterImp() {
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        noWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighterWithColor"); //Assumes scope is prototype.
+        noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
+    }
+
+    @Test
+    public void shouldNotApplyStylesWhenNoWordsHighlighterAndThisSentence() {
+        String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
+        String expectedHighlightedSentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
+        String highlightSentence = noWordsSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expectedHighlightedSentence, highlightSentence);
+    }
+
+    @Test(expected = SyntaxHighlightingException.class)
+    public void shouldReportThatStyleCannotBeAppliedWhenNoWordsHighlighterAndWhiteSpaces() {
+        String sentence = "     ";
+        noWordsSyntaxHighlighterImp.highlightThis(sentence);
+    }
+
+    @Test
+    public void shouldApplyRedToTheWordJava() {
+        String sentence = "I going join java mentoring program.";
+        String expectedHighlightedSentence = "I going join [red] java [/red] mentoring program.";
+        String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expectedHighlightedSentence, highlightSentence);
+    }
+
+    @Test
+    public void shouldApplyYellowToTheWordInItalic() {
+        String sentence = "I going to join";
+        String expectedHighlightedSentence = "I going [italic] [yellow] to [/yellow] [/italic] join";
+        String highlightSentence = amToInWordsWithColorSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expectedHighlightedSentence, highlightSentence);
+    }
+
 }
