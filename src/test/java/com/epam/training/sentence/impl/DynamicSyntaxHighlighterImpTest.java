@@ -15,7 +15,6 @@ import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Philip on 16/03/2017.
@@ -101,6 +100,24 @@ public class DynamicSyntaxHighlighterImpTest {
         String sentence = "I am going to join,java mentoring program to learn cool stuff in fun way.";
         String expected  = "I [bold] am [/bold] going [italic] [yellow] to [/yellow] [/italic] join,java mentoring program " +
                 "[italic] [yellow] to [/yellow] [/italic] learn cool stuff [underline] in [/underline] fun way.";
+
+        String highlightSentence = dynamicSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expected, highlightSentence);
+    }
+
+    @Test
+    public void shouldApplyStyleOnlyWhenMatchedWholeWord() {
+        String sentence = "I am going in now.";
+        String expected = "I [bold] am [/bold] going [underline] in [/underline] now.";
+
+        String highlightSentence = dynamicSyntaxHighlighterImp.highlightThis(sentence);
+        assertEquals(expected, highlightSentence);
+    }
+
+    @Test
+    public void shouldApplyStyleWhenMatchedWordIsNextToAFullStop() {
+        String sentence = "I will go in.";
+        String expected = "I will go [underline] in [/underline].";
 
         String highlightSentence = dynamicSyntaxHighlighterImp.highlightThis(sentence);
         assertEquals(expected, highlightSentence);
