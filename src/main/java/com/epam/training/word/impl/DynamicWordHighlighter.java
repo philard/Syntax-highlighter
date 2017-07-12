@@ -9,21 +9,22 @@ import com.epam.training.word.WordHighlighter;
 public class DynamicWordHighlighter implements WordHighlighter {
 
 
-    private KeywordEffectPair config;
+    private KeywordEffectPair keywordEffectPair;
 
-    public DynamicWordHighlighter(KeywordEffectPair config) {
-        this.config = config;
+    public DynamicWordHighlighter(KeywordEffectPair keywordEffectPair) {
+        this.keywordEffectPair = keywordEffectPair;
     }
 
     @Override
     public String highlightSentence(String sentence) {
-        String highlightedWord = "[" + config.getEffect() + "] " + config.getKeyword() + " [/" + config.getEffect() + "]";
-        sentence = sentence.replaceAll("(?<=\\s)" + config.getKeyword() + "(?=\\s|\\.)", highlightedWord);
+        String highlightedWord = "[" + keywordEffectPair.getEffect() + "] " 
+                + keywordEffectPair.getKeyword() + " [/" + keywordEffectPair.getEffect() + "]";
+        sentence = sentence.replaceAll("(?<=\\s)" + keywordEffectPair.getKeyword() + "(?=\\s|\\.)", highlightedWord);
         return sentence;
     }
 
     public String highlightSentence(String sentence, KeywordEffectPair config) {
-        this.config = config;
+        this.keywordEffectPair = config;
         return this.highlightSentence(sentence);
     }
     
