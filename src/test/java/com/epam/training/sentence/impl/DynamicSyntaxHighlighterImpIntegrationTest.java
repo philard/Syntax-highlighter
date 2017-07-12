@@ -2,13 +2,14 @@ package com.epam.training.sentence.impl;
 
 import com.epam.training.context.AppConfig;
 import com.epam.training.exception.SyntaxHighlightingException;
-import com.epam.training.word.WordHighlighter;
+import com.epam.training.sentence.data.KeywordEffectPair;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,13 +27,13 @@ public class DynamicSyntaxHighlighterImpIntegrationTest {
     @Before
     public void setupAmToInWordsSyntaxHighlighterImp() {
         AbstractApplicationContext amToInContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        dynamicSyntaxHighlighter = (SyntaxHighlighterImp) amToInContext.getBean("dynamicSyntaxHighlighter");
+        dynamicSyntaxHighlighter = (DynamicSyntaxHighlighterImp) amToInContext.getBean("dynamicSyntaxHighlighter");
         String serializedConfig = "am-bold,to-italic,in-underline,to-yellow,java-red";
         dynamicSyntaxHighlighter.setHighlightConfig(buildHighlightConfig(serializedConfig));
 
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        noWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighterWithColor");
-        noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
+        noWordsSyntaxHighlighterImp = (DynamicSyntaxHighlighterImp) context.getBean("dynamicSyntaxHighlighter");
+        noWordsSyntaxHighlighterImp.setHighlightConfig(new ArrayList<>());
     }
 
     private Collection<KeywordEffectPair> buildHighlightConfig(String serializedConfig) {
@@ -40,8 +41,9 @@ public class DynamicSyntaxHighlighterImpIntegrationTest {
 
         String[] configArray = serializedConfig.split("(-|,\\s?)");
         for (int i = 0; i < configArray.length; i++) {
-            highlightConfigs.add(new KeywordEffectPair(configArray.next(), configArray.next()));
+            pairs.add(new KeywordEffectPair(configArray[i], configArray[i+1]));
         }
+        return pairs;
     }
 
 

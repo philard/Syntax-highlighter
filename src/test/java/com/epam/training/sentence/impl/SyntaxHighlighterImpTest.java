@@ -31,6 +31,10 @@ public class SyntaxHighlighterImpTest {
     public void setupAmToInWordsSyntaxHighlighterImp() {
         amToInWordsSyntaxHighlighterImp = new SyntaxHighlighterImp(buildSentenceValidator());
         amToInWordsSyntaxHighlighterImp.setWordHighlighters(buildWordHighlighters());
+
+
+        noWordsSyntaxHighlighterImp = new SyntaxHighlighterImp(buildSentenceValidator());
+        noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
     }
 
     private SentenceValidatorImp buildSentenceValidator() {
@@ -138,12 +142,6 @@ public class SyntaxHighlighterImpTest {
 
         String highlightSentence = amToInWordsSyntaxHighlighterImp.highlightThis(sentence);
         assertEquals(expected, highlightSentence);
-    }
-
-    @Before
-    public void setupNoWordsSyntaxHighlighterImp() {
-        noWordsSyntaxHighlighterImp = new SyntaxHighlighterImp(buildSentenceValidator());
-        noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
     }
 
     @Test
