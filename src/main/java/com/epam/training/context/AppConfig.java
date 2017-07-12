@@ -44,32 +44,6 @@ public class AppConfig {
     private SimpleWordHighlighter getInWordHighlighter() {
         return new SimpleWordHighlighter("[underline]", "in", "[/underline]");
     }
-
-    @Bean(name = "syntaxHighlighterWithColor")
-    @Scope("prototype")
-    public SyntaxHighlighter syntaxHighlighterWithColor() {
-        SyntaxHighlighterImp syntaxHighlighterWithColor = new SyntaxHighlighterImp(new SentenceValidatorImp());
-        syntaxHighlighterWithColor.setWordHighlighters(colorWordHighlighters());
-        return syntaxHighlighterWithColor;
-    }
-
-    private Collection<WordHighlighter> colorWordHighlighters() {
-        ArrayList<WordHighlighter> colorWordHighlighters = new ArrayList<>();
-        colorWordHighlighters.add(getAmWordHighlighter());
-        colorWordHighlighters.add(getToWordHighlighter());
-        colorWordHighlighters.add(getInWordHighlighter());
-        colorWordHighlighters.add(getJavaWordRedHighlighter());
-        colorWordHighlighters.add(getToWordYellowHighlighter());
-        return colorWordHighlighters;
-    }
-
-    private SimpleWordHighlighter getJavaWordRedHighlighter() {
-        return new SimpleWordHighlighter("[red]", "java", "[/red]");
-    }
-    
-    private SimpleWordHighlighter getToWordYellowHighlighter() {
-        return new SimpleWordHighlighter("[yellow]", "to", "[/yellow]");
-    }
     
     @Bean(name = "dynamicSyntaxHighlighter")
     @Scope("prototype")

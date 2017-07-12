@@ -14,9 +14,10 @@ import java.util.Iterator;
 public class AppMain {
 
     public static void main(String args[]) {
+        String serializedConfig = configFromCli(args);
+        
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         DynamicSyntaxHighlighterImp dynamicSyntaxHighlighter = (DynamicSyntaxHighlighterImp) context.getBean("dynamicSyntaxHighlighter");
-        String serializedConfig = "am-bold,to-italic,in-underline,to-yellow,java-red";
         Collection<KeywordEffectPair> keywordEffectPairCollection = buildHighlightConfig(serializedConfig);
         dynamicSyntaxHighlighter.setHighlightConfig(keywordEffectPairCollection);
         
@@ -24,6 +25,10 @@ public class AppMain {
         System.out.println(dynamicSyntaxHighlighter.highlightThis(sentence));
         context.close();
 
+    }
+
+    private static String configFromCli(String[] args) {
+        return "am-bold,to-italic,in-underline,to-yellow,java-red";
     }
 
 
