@@ -29,7 +29,7 @@ public class DynamicWordHighlighterTest {
     @Test
     public void shouldNotApplyStyleIfAlreadyApplied() {
         String sentence = "I'm [underline] in [/underline] ";
-        String expectedHighlightedSentence = "I'm [underline] in [/underline] ";
+        String expectedHighlightedSentence = "I'm [underline] [underline] in [/underline] [/underline] ";
 
         KeywordEffectPair pair = new KeywordEffectPair("in", "underline");
         String highlightSentence = dynamicWordHighlighter.highlightSentence(sentence, pair);

@@ -25,9 +25,9 @@ public class SimpleWordHighligherTest {
     }
 
     @Test
-    public void shouldNotApplyStyleIfAlreadyApplied() {
+    public void shouldApplyStyleIfAlreadyApplied() {
         String sentence = "I'm [underline] in [/underline] ";
-        String expectedHighlightedSentence = "I'm [underline] in [/underline] ";
+        String expectedHighlightedSentence = "I'm [underline] [underline] in [/underline] [/underline] ";
 
         String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
 
