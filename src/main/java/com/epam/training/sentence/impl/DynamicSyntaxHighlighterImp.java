@@ -23,10 +23,6 @@ public class DynamicSyntaxHighlighterImp extends ValidatingSyntaxHighlighter {
         this.highlightConfig = highlightConfig;
     }
 
-    public DynamicWordHighlighter getDynamicWordHighlighter() {
-        return dynamicWordHighlighter;
-    }
-
     public void setDynamicWordHighlighter(DynamicWordHighlighter dynamicWordHighlighter) {
         this.dynamicWordHighlighter = dynamicWordHighlighter;
     }
@@ -34,9 +30,9 @@ public class DynamicSyntaxHighlighterImp extends ValidatingSyntaxHighlighter {
     @Override
     public String highlightThis(String sentence) {
         this.sentenceValidator.validate(sentence);
-        highlightConfig.forEach((KeywordEffectPair keywordEffectPair) -> {
-            getDynamicWordHighlighter().highlightSentence(sentence, keywordEffectPair);
-        });
+        for(KeywordEffectPair keywordEffectPair: highlightConfig) {
+            sentence = this.dynamicWordHighlighter.highlightSentence(sentence, keywordEffectPair);
+        }
         return sentence;
     }
 
