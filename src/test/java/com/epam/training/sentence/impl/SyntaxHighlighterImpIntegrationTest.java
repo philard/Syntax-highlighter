@@ -1,7 +1,5 @@
 package com.epam.training.sentence.impl;
 
-import static org.junit.Assert.assertEquals;
-
 import com.epam.training.context.AppConfig;
 import com.epam.training.exception.SyntaxHighlightingException;
 import com.epam.training.word.WordHighlighter;
@@ -11,6 +9,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * SyntaxHighlighterImp is now composed of services. This is an integration test class to test it.

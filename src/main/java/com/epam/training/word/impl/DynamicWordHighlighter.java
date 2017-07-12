@@ -11,8 +11,8 @@ public class DynamicWordHighlighter implements WordHighlighter {
 
     private KeywordEffectPair keywordEffectPair;
 
-    public DynamicWordHighlighter(KeywordEffectPair keywordEffectPair) {
-        this.keywordEffectPair = keywordEffectPair;
+    public DynamicWordHighlighter(String keyword, String effect) {
+        this.keywordEffectPair = new KeywordEffectPair(keyword, effect);
     }
 
     @Override

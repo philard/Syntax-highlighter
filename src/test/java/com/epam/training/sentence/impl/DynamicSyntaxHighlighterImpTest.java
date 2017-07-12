@@ -66,7 +66,7 @@ public class DynamicSyntaxHighlighterImpTest {
     }
 
     private DynamicWordHighlighter buildWordHighlighter() {
-        return new DynamicWordHighlighter(new KeywordEffectPair("in", "underline"));
+        return new DynamicWordHighlighter("in", "underline");
     }
 
     @Test(expected = SyntaxHighlightingException.class)

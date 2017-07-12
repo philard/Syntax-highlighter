@@ -12,7 +12,7 @@ public class DynamicWordHighlighterTest {
 
     @Before
     public void setup() {
-        dynamicWordHighlighter = new DynamicWordHighlighter(new KeywordEffectPair("in", "underline"));
+        dynamicWordHighlighter = new DynamicWordHighlighter("in", "underline");
     }
 
     @Test

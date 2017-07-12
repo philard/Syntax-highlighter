@@ -1,9 +1,11 @@
 package com.epam.training.context;
 
 import com.epam.training.sentence.SyntaxHighlighter;
+import com.epam.training.sentence.impl.DynamicSyntaxHighlighterImp;
 import com.epam.training.sentence.impl.SyntaxHighlighterImp;
 import com.epam.training.validation.impl.SentenceValidatorImp;
 import com.epam.training.word.WordHighlighter;
+import com.epam.training.word.impl.DynamicWordHighlighter;
 import com.epam.training.word.impl.SimpleWordHighlighter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,5 +69,17 @@ public class AppConfig {
     
     private SimpleWordHighlighter getToWordYellowHighlighter() {
         return new SimpleWordHighlighter("[yellow]", "to", "[/yellow]");
+    }
+    
+    @Bean(name = "dynamicSyntaxHighlighter")
+    @Scope("prototype")
+    public SyntaxHighlighter dynamicSyntaxHighlighter() {
+        DynamicSyntaxHighlighterImp dynamicSyntaxHighlighter = new DynamicSyntaxHighlighterImp(new SentenceValidatorImp());
+        dynamicSyntaxHighlighter.setDynamicWordHighlighter(dynamicWordHighlighter());
+        return dynamicSyntaxHighlighter;
+    }
+
+    private DynamicWordHighlighter dynamicWordHighlighter() {
+        return new DynamicWordHighlighter("in", "underline");
     }
 }
