@@ -1,17 +1,18 @@
 package com.epam.training.word.impl;
 
+import com.epam.training.sentence.data.KeywordEffectPair;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SimpleWordHighligherTest {
+public class DynamicWordHighlighterTest {
 
-    private SimpleWordHighlighter simpleWordHighlighter;
+    private DynamicWordHighlighter dynamicWordHighlighter;
 
     @Before
     public void setup() {
-        simpleWordHighlighter = new SimpleWordHighlighter("[underline]", "in", "[/underline]");
+        dynamicWordHighlighter = new DynamicWordHighlighter(new KeywordEffectPair("in", "underline"));
     }
 
     @Test
@@ -19,7 +20,8 @@ public class SimpleWordHighligherTest {
         String sentence = "I know everything, so it's waste of effort.";
         String expectedHighlightedSentence = "I know everything, so it's waste of effort.";
 
-        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
+        KeywordEffectPair pair = new KeywordEffectPair("in", "underline");
+        String highlightSentence = dynamicWordHighlighter.highlightSentence(sentence, pair);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }
@@ -29,7 +31,8 @@ public class SimpleWordHighligherTest {
         String sentence = "I'm [underline] in [/underline] ";
         String expectedHighlightedSentence = "I'm [underline] in [/underline] ";
 
-        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
+        KeywordEffectPair pair = new KeywordEffectPair("in", "underline");
+        String highlightSentence = dynamicWordHighlighter.highlightSentence(sentence, pair);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
 
@@ -40,7 +43,8 @@ public class SimpleWordHighligherTest {
         String sentence = "I'm going in now";
         String expectedHighlightedSentence = "I'm going [underline] in [/underline] now";
 
-        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
+        KeywordEffectPair pair = new KeywordEffectPair("in", "underline");
+        String highlightSentence = dynamicWordHighlighter.highlightSentence(sentence, pair);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }
@@ -50,7 +54,8 @@ public class SimpleWordHighligherTest {
         String sentence = "I'm inn.";
         String expectedHighlightedSentence = "I'm inn.";
 
-        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
+        KeywordEffectPair pair = new KeywordEffectPair("in", "underline");
+        String highlightSentence = dynamicWordHighlighter.highlightSentence(sentence, pair);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }
@@ -60,7 +65,8 @@ public class SimpleWordHighligherTest {
         String sentence = "I will go in.";
         String expectedHighlightedSentence = "I will go [underline] in [/underline].";
 
-        String highlightSentence = simpleWordHighlighter.highlightSentence(sentence);
+        KeywordEffectPair pair = new KeywordEffectPair("in", "underline");
+        String highlightSentence = dynamicWordHighlighter.highlightSentence(sentence, pair);
 
         assertEquals(expectedHighlightedSentence, highlightSentence);
     }
