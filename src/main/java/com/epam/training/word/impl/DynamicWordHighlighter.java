@@ -15,17 +15,17 @@ public class DynamicWordHighlighter implements WordHighlighter {
         this.keywordEffectPair = new KeywordEffectPair(keyword, effect);
     }
 
+    public String highlightSentence(String sentence, KeywordEffectPair config) {
+        this.keywordEffectPair = config;
+        return this.highlightSentence(sentence);
+    }
+
     @Override
     public String highlightSentence(String sentence) {
         String highlightedWord = "[" + keywordEffectPair.getEffect() + "] " 
                 + keywordEffectPair.getKeyword() + " [/" + keywordEffectPair.getEffect() + "]";
         sentence = sentence.replaceAll("(?<=\\s)" + keywordEffectPair.getKeyword() + "(?=\\s|\\.)", highlightedWord);
         return sentence;
-    }
-
-    public String highlightSentence(String sentence, KeywordEffectPair config) {
-        this.keywordEffectPair = config;
-        return this.highlightSentence(sentence);
     }
     
 }

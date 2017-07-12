@@ -15,15 +15,7 @@ public class SyntaxHighlighterImp implements SyntaxHighlighter {
 	
     private SentenceValidator sentenceValidator;
 
-	public SentenceValidator getSentenceValidator() {
-		return sentenceValidator;
-	}
-
 	private Collection<WordHighlighter> wordHighlighters;
-
-	public Collection<WordHighlighter> getWordHighlighters() {
-		return wordHighlighters;
-	}
 
 	public void setWordHighlighters(Collection<WordHighlighter> wordHighlighters) {
 		this.wordHighlighters = wordHighlighters;
