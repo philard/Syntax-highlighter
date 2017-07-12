@@ -25,13 +25,8 @@ public class AppMain {
 
     private Collection<KeywordEffectPair> buildHighlightConfig(String serializedConfig) {
         ArrayList<KeywordEffectPair> pairs = new ArrayList<>();
-//        pairs.add(new KeywordEffectPair("am", "bold"));
-//        pairs.add(new KeywordEffectPair("to", "italic"));
-//        pairs.add(new KeywordEffectPair("in", "underline"));
-//        pairs.add(new KeywordEffectPair("to", "yellow"));
-//        pairs.add(new KeywordEffectPair("java", "red"));
 
-        String[] configArray = serializedConfig.split("(-|,)");
+        String[] configArray = serializedConfig.split("(-|,\\s?)");
         for (int i = 0; i < configArray.length; i++) {
             highlightConfigs.add(new KeywordEffectPair(configArray.next(), configArray.next()));
         }

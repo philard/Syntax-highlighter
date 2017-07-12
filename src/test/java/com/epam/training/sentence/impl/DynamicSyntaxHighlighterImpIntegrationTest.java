@@ -19,28 +19,29 @@ import static org.junit.Assert.assertEquals;
  */
 public class DynamicSyntaxHighlighterImpIntegrationTest {
 
-    private SyntaxHighlighterImp dynamicSyntaxHighlighter;
+    private DynamicSyntaxHighlighterImp dynamicSyntaxHighlighter;
 
-    private SyntaxHighlighterImp noWordsSyntaxHighlighterImp;
+    private DynamicSyntaxHighlighterImp noWordsSyntaxHighlighterImp;
 
     @Before
     public void setupAmToInWordsSyntaxHighlighterImp() {
         AbstractApplicationContext amToInContext = new AnnotationConfigApplicationContext(AppConfig.class);
         dynamicSyntaxHighlighter = (SyntaxHighlighterImp) amToInContext.getBean("dynamicSyntaxHighlighter");
-        dynamicSyntaxHighlighter.setHighlightConfig(buildHighlightConfig());
+        String serializedConfig = "am-bold,to-italic,in-underline,to-yellow,java-red";
+        dynamicSyntaxHighlighter.setHighlightConfig(buildHighlightConfig(serializedConfig));
 
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         noWordsSyntaxHighlighterImp = (SyntaxHighlighterImp) context.getBean("syntaxHighlighterWithColor");
         noWordsSyntaxHighlighterImp.setWordHighlighters(new ArrayList<WordHighlighter>());
     }
 
-    private Collection<KeywordEffectPair> buildHighlightConfig() {
+    private Collection<KeywordEffectPair> buildHighlightConfig(String serializedConfig) {
         ArrayList<KeywordEffectPair> pairs = new ArrayList<>();
-        pairs.add(new KeywordEffectPair("am", "bold"));
-        pairs.add(new KeywordEffectPair("to", "italic"));
-        pairs.add(new KeywordEffectPair("in", "underline"));
-        pairs.add(new KeywordEffectPair("to", "yellow"));
-        pairs.add(new KeywordEffectPair("java", "red"));
+
+        String[] configArray = serializedConfig.split("(-|,\\s?)");
+        for (int i = 0; i < configArray.length; i++) {
+            highlightConfigs.add(new KeywordEffectPair(configArray.next(), configArray.next()));
+        }
     }
 
 

@@ -22,16 +22,7 @@ import static org.mockito.Mockito.when;
 public class DynamicSyntaxHighlighterImpTest {
 
     private DynamicSyntaxHighlighterImp dynamicSyntaxHighlighterImp;
-//    @Mock
-//    private KeywordEffectPair amToBold;
-//    @Mock
-//    private KeywordEffectPair toToItalic;
-//    @Mock
-//    private KeywordEffectPair inToUnderline;
-//    @Mock
-//    private KeywordEffectPair toToYellow;
-//    @Mock
-//    private KeywordEffectPair javaToRed;
+
     private Collection<KeywordEffectPair> highlightConfigs;
 
     private SyntaxHighlighterImp noWordsSyntaxHighlighterImp;
@@ -43,20 +34,16 @@ public class DynamicSyntaxHighlighterImpTest {
     }
 
     private Collection<KeywordEffectPair> buildHighlightConfig() {
-        String serializedConfig = "am-bold,to-italic,in-underline,to-yellow,java-red";
-        String[] configArray = serializedConfig.split("(-|,)");
+        String serializedConfig = "am-bold, to-italic, in-underline, to-yellow, java-red";
+        String[] configArray = serializedConfig.split("(-|,\\s?)");
         for (int i = 0; i < configArray.length; i++) {
             KeywordEffectPair keywordEffectPair = Mockito.mock(KeywordEffectPair.class);
-            when(keywordEffectPair).getKeyword(configArray.next()).thenReturn(configArray.next());
-            highlightConfigs.add(keywordsEffectPair);
+            when(keywordEffectPair.getKeyword()).thenReturn(configArray[i]);
+            when(keywordEffectPair.getEffect()).thenReturn(configArray[i+1]);
+
+            highlightConfigs.add(keywordEffectPair);
         }
         
-//        when(amToBold).getKeyword("am").thenReturn("bold");
-//        when(toToItalic).getKeyword("to").thenReturn("italic");
-//        when(inToUnderline).getKeyword("in").thenReturn("underline");
-//        when(toToYellow).getKeyword("to").thenReturn("yellow");
-//        when(javaToRed).getKeyword("java").thenReturn("red");
-//        ArrayList<KeywordEffectPair> pairs = Arrays.asList(amToBold, toToItalic, inToUnderline, toToYellow, javaToRed);
         return highlightConfigs;
     }
 
