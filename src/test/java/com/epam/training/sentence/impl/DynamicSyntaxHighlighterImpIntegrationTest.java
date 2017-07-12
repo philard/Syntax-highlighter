@@ -9,7 +9,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -36,14 +38,14 @@ public class DynamicSyntaxHighlighterImpIntegrationTest {
         noWordsSyntaxHighlighterImp.setHighlightConfig(new ArrayList<>());
     }
 
-    private Collection<KeywordEffectPair> buildHighlightConfig(String serializedConfig) {
-        ArrayList<KeywordEffectPair> pairs = new ArrayList<>();
+    private static Collection<KeywordEffectPair> buildHighlightConfig(String serializedConfig) {
+        ArrayList<KeywordEffectPair> config = new ArrayList<>();
 
-        String[] configArray = serializedConfig.split("(-|,\\s?)");
-        for (int i = 0; i < configArray.length; i++) {
-            pairs.add(new KeywordEffectPair(configArray[i], configArray[i+1]));
+        Iterator<String> words = Arrays.asList(serializedConfig.split("(-|,\\s?)")).iterator();
+        while(words.hasNext()) {
+            config.add(new KeywordEffectPair(words.next(), words.next()));
         }
-        return pairs;
+        return config;
     }
 
 
