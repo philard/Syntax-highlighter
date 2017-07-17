@@ -58,7 +58,7 @@
                     <goals><goal>prepare-agent</goal></goals>
                 </execution>
                     <execution>
-                        <phase>prepare-package</phase>
+                        <phase>post-integration-test</phase>
                         <id>default-report</id>
                         <goals><goal>report</goal></goals>
                     </execution>
