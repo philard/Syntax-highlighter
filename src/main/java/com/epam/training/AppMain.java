@@ -11,9 +11,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class AppMain {
+public final class AppMain {
 
-    public static void main(String args[]) {
+    private AppMain()
+    {
+        throw new AssertionError("Instantiating utility class...");
+    }
+
+    public static void main (String args[]) {
         String serializedConfig = configFromCli(args);
         
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
@@ -22,13 +27,14 @@ public class AppMain {
         dynamicSyntaxHighlighter.setHighlightConfig(keywordEffectPairCollection);
         
         String sentence = "I am going to join java mentoring program to learn cool stuff in fun way.";
-        System.out.println(dynamicSyntaxHighlighter.highlightThis(sentence));
+        String highlighted = dynamicSyntaxHighlighter.highlightThis(sentence);
+        System.out.println(highlighted);
         context.close();
-
     }
 
-    private static String configFromCli(String[] args) {
-        return "am-bold,to-italic,in-underline,to-yellow,java-red";
+    private static String configFromCli(String[] arguments) {
+        
+        return (arguments.length>0? arguments[0]:"am-bold,to-italic,in-underline,to-yellow,java-red");
     }
 
 
