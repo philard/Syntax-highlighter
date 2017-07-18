@@ -29,11 +29,12 @@ public class DynamicSyntaxHighlighterImp extends ValidatingSyntaxHighlighter {
     
     @Override
     public String highlightThis(String sentence) {
-        this.sentenceValidator.validate(sentence);
+        this.getSentenceValidator().validate(sentence);
+        String highlighted = sentence;
         for(KeywordEffectPair keywordEffectPair: highlightConfig) {
-            sentence = this.dynamicWordHighlighter.highlightSentence(sentence, keywordEffectPair);
+            highlighted = this.dynamicWordHighlighter.highlightSentence(highlighted, keywordEffectPair);
         }
-        return sentence;
+        return highlighted;
     }
 
 }

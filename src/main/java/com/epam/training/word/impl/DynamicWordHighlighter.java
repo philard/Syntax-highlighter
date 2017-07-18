@@ -24,8 +24,9 @@ public class DynamicWordHighlighter implements WordHighlighter {
     public String highlightSentence(String sentence) {
         String highlightedWord = "[" + keywordEffectPair.getEffect() + "] " 
                 + keywordEffectPair.getKeyword() + " [/" + keywordEffectPair.getEffect() + "]";
-        sentence = sentence.replaceAll("(?<=\\s)" + keywordEffectPair.getKeyword() + "(?=\\s|\\.)", highlightedWord);
-        return sentence;
+        String highlighted = sentence;
+        return highlighted.replaceAll("(?<=\\s)" + keywordEffectPair.getKeyword() + "(?=\\s|\\.)", 
+                highlightedWord);
     }
     
 }

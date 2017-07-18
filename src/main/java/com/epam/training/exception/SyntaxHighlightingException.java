@@ -8,21 +8,8 @@ public class SyntaxHighlightingException extends RuntimeException {
 		super();
 	}
 
-	public SyntaxHighlightingException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
-	public SyntaxHighlightingException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
 	public SyntaxHighlightingException(String message) {
 		super(message);
-	}
-
-	public SyntaxHighlightingException(Throwable cause) {
-		super(cause);
 	}
 
 }

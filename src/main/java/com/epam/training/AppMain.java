@@ -15,7 +15,7 @@ public final class AppMain {
 
     private AppMain()
     {
-        throw new AssertionError("Instantiating utility class...");
+        throw new UnsupportedOperationException();
     }
 
     public static void main (String args[]) {
@@ -34,7 +34,7 @@ public final class AppMain {
 
     private static String configFromCli(String[] arguments) {
         
-        return (arguments.length>0? arguments[0]:"am-bold,to-italic,in-underline,to-yellow,java-red");
+        return (arguments.length > 0 ? arguments[0]:"am-bold,to-italic,in-underline,to-yellow,java-red");
     }
 
 

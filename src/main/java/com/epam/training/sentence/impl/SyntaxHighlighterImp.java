@@ -12,23 +12,24 @@ public class SyntaxHighlighterImp implements SyntaxHighlighter {
     public SyntaxHighlighterImp(SentenceValidator sentenceValidator) {
         this.sentenceValidator = sentenceValidator;
     }
-	
+    
     private SentenceValidator sentenceValidator;
 
-	private Collection<WordHighlighter> wordHighlighters;
+    private Collection<WordHighlighter> wordHighlighters;
 
-	public void setWordHighlighters(Collection<WordHighlighter> wordHighlighters) {
-		this.wordHighlighters = wordHighlighters;
-	}
+    public void setWordHighlighters(Collection<WordHighlighter> wordHighlighters) {
+        this.wordHighlighters = wordHighlighters;
+    }
 
-	public String highlightThis(String sentence) throws SyntaxHighlightingException {
+    public String highlightThis(String sentence) throws SyntaxHighlightingException {
 
-		sentenceValidator.validate(sentence);
+        sentenceValidator.validate(sentence);
 
-		for(WordHighlighter wordHighlighter: wordHighlighters) {
-			sentence = wordHighlighter.highlightSentence(sentence);
-		}
-		return sentence;
-	}
+        String highlighted = sentence;
+        for(WordHighlighter wordHighlighter: wordHighlighters) {
+            highlighted = wordHighlighter.highlightSentence(highlighted);
+        }
+        return highlighted;
+    }
 
 }
