@@ -1,5 +1,4 @@
-Using jacoco-maven-plugin for istall time test coverage checks and reports. Unit tests using Mokito. Checked with IDEA's "QAPlug" using FindBugs, Checkstyle & PMD.
-
+Using JaCoCo maven plugin for install time test coverage checks and reports. Unit tests using Mokito. Checked with IDEA's "QAPlug" using FindBugs, Checkstyle & PMD.
 
 **To test**
 
