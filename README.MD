@@ -2,11 +2,13 @@ Using JaCoCo maven plugin for install time test coverage checks and reports. Uni
 
 **To test**
 
-Run "mvn test".
+mvn install
+
+open ./target/site/jacoco/index.html
 
 **To run**
 
-Run: mvn clean install
+mvn clean install
 
-Run: java -jar syntax-highlighter-0.0.1-SNAPSHOT.jar 
+java -jar ./target/syntax-highlighter-0.0.1-SNAPSHOT.jar
 
